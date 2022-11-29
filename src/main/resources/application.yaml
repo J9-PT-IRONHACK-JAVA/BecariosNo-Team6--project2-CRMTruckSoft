@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/CRM_LBL_Truck
+    username: ironhacker
+    password: 1r0nh4ck3r
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create

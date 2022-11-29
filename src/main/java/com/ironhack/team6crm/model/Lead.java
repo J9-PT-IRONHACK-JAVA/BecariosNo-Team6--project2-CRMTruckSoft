@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
@@ -15,6 +12,7 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "account_lead")
 public class Lead {
 
     @Id
@@ -22,7 +20,8 @@ public class Lead {
     private Long id;
     private String name;
     private String phoneNumber;
-    @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "ERROR EN EL TIPO DE MAIL")
+    //@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "ERROR EN EL TIPO DE MAIL")
+    @Email
     private String email;
     private String companyName;
 
