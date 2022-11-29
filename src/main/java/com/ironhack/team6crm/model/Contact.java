@@ -8,6 +8,7 @@ import org.intellij.lang.annotations.Pattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +29,10 @@ public class Contact {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @OneToMany (mappedBy = "decisionMaker")
+    private List<Opportunity> opportunity;
+
 
     public Contact(String name, String phoneNumber, String email) {
         this.name = name;
