@@ -25,4 +25,8 @@ public class SalesRep {
     @OneToMany(mappedBy = "salesRep")
     private List<Account> account;
 
+
+    public SalesRep(String name) {
+        this.name = name;
+    }
 }
