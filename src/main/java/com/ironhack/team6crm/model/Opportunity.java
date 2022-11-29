@@ -1,15 +1,37 @@
 package com.ironhack.team6crm.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
 public class Opportunity {
 
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated
     private Product product;
+
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "contact_id")
     private Contact decisionMaker;
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    @Enumerated
     private Status status;
+
 
 
 }
