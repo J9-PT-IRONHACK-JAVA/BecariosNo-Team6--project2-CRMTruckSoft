@@ -28,6 +28,10 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Opportunity> opportunityList;
 
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
+
     public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
         this.industry = industry;
         this.employeeCount = employeeCount;

@@ -29,6 +29,10 @@ public class Opportunity {
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
+
     @Enumerated
     private Status status;
 

@@ -33,6 +33,9 @@ public class Contact {
     @OneToMany (mappedBy = "decisionMaker")
     private List<Opportunity> opportunity;
 
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
 
     public Contact(String name, String phoneNumber, String email) {
         this.name = name;

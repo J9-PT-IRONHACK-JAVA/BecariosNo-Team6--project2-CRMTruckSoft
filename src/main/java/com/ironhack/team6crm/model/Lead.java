@@ -25,6 +25,9 @@ public class Lead {
     private String email;
     private String companyName;
 
+    @ManyToOne
+    @JoinColumn(name = "sales_rep_id")
+    private SalesRep salesRep;
 
     public Lead(String name, String phoneNumber, String email, String companyName) {
         this.name = name;
