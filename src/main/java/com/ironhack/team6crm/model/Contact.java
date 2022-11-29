@@ -1,15 +1,37 @@
 package com.ironhack.team6crm.model;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.intellij.lang.annotations.Pattern;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Contact {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private int id;
+    @NotNull
     private String name;
     private String phoneNumber;
+    @NotNull
+    @Email
     private String email;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-
+    public Contact(String name, String phoneNumber, String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }
