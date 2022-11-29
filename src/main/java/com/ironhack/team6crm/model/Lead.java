@@ -20,7 +20,6 @@ public class Lead {
     private Long id;
     private String name;
     private String phoneNumber;
-    //@Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "ERROR EN EL TIPO DE MAIL")
     @Email
     private String email;
     private String companyName;

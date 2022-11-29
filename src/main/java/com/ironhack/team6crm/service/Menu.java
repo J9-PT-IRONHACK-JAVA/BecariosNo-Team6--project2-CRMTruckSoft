@@ -25,7 +25,7 @@ public class Menu {
                     if (options.length<3){
                         System.out.println("More information please!");
                     }else {
-                        lookupMenu(options);
+                        MenuLookup.lookupMenu(options);
                     }
                     break;
                 }
@@ -36,25 +36,50 @@ public class Menu {
                 }
 
                 case "new": {
-                    System.out.println("new Menu");
+                    if(options.length < 2){
+                        System.out.println("Please insert the type");
+                    } else {
+                        MenuNew.createNew(options[1]);
+                    }
                     break;
                 }
                 case "report": {
-                    System.out.println("report Menu");
+                    if (options.length < 3){
+                    System.out.println("More information please!");
+                    }else {
+                    MenuReport.reportsMenu();
+                     }
                     break;
                 }
 
-                case "close": {
-                    System.out.println("close");
-                    break;
-                }
                 case "convert": {
                     System.out.println("convert");
                     break;
                 }
 
-                case "show": {
-                    System.out.println("show");
+                case "list": {
+                    System.out.println("list");
+                    break;
+                }
+
+                case "link": {
+                    System.out.println("link");
+                    break;
+                }
+
+                case "help": {
+                    System.out.println("help");
+                    break;
+                }
+
+                //Show all options
+                case "menu": {
+                    System.out.println("menu");
+                    break;
+                }
+
+                case "exit": {
+                    System.out.println("exit");
                     break;
                 }
 
@@ -64,26 +89,7 @@ public class Menu {
             }
         }while(!options[0].equals("exit"));
 
-
-    }
-
-    public static void lookupMenu(String[] object){
-
-        switch (object[1]){
-            case "lead":{
-                System.out.println("lead");
-                break;
-            }
-        }
-    }
-
-    public static void reportsMenu(String[] object){
-
-        switch (object[1]){
-            case "lead":{
-                System.out.println("lead");
-                break;
-            }
-        }
     }
 }
+
+
