@@ -19,8 +19,6 @@ public class Menu {
             options = input.split(" ");
 
             switch (options[0]) {
-
-
                 case "lookup": {
                     if (options.length<3){
                         System.out.println("More information please!");
@@ -47,7 +45,7 @@ public class Menu {
                     if (options.length < 3){
                     System.out.println("More information please!");
                     }else {
-                    MenuReport.reportsMenu();
+                    MenuReport.reportsMenu(options);
                      }
                     break;
                 }
