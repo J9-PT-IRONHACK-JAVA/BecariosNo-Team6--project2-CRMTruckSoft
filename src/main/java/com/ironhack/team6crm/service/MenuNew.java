@@ -26,7 +26,7 @@ public class MenuNew {
     public void createNew(String option){
         switch (option) {
             case "lead": {
-                List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n";
+                List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n");
                 Lead newLead= new Lead(leadData.get(0), leadData.get(1), leadData.get(2), leadData.get(3));
                 leadRepository.save(newLead);
                 System.out.println("New lead " + leadData.get(0) + " has been successfully created");
