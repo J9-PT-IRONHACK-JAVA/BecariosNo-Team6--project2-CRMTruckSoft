@@ -10,6 +10,8 @@ public class Menu {
     MenuList menuList;
     @Autowired
     MenuLookup menuLookup;
+    @Autowired
+    MenuNew menuNew;
     private final Scanner scanner = new Scanner(System.in);
 
     public void run(){
@@ -47,7 +49,7 @@ public class Menu {
                     if(options.length < 2){
                         System.out.println("Please insert the type");
                     } else {
-                        MenuNew.createNew(options[1]);
+                        menuNew.createNew(options[1]);
                     }
                     break;
                 }

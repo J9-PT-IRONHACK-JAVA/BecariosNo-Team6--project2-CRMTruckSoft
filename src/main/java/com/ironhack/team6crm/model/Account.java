@@ -19,6 +19,8 @@ public class Account {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Industry industry;
+
+    private String companyName;
     private int employeeCount;
     private String city;
     private String country;
@@ -33,8 +35,8 @@ public class Account {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    public Account(Industry industry, int employeeCount, String city, String country) {
-        this.industry = industry;
+    public Account(String companyName, int employeeCount, String city, String country) {
+        this.companyName = companyName;
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
