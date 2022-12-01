@@ -11,7 +11,7 @@ public class MenuNew {
             case "lead": {
                 List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n", "sales rep name: \n");
                 System.out.println(leadData);
-                Lead newLead= new Lead(leadData.get(0), )
+                //Lead newLead= new Lead(leadData.get(0), )
                 break;
             }
             case "opportunity": {
@@ -19,9 +19,11 @@ public class MenuNew {
                 break;
             }
             case "account": {
+                System.out.println("New Account Menu");
                 break;
             }
             case "contact": {
+                System.out.println("New Contact Menu");
                 break;
             }
         }

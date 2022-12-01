@@ -29,7 +29,11 @@ public class Menu {
                 }
 
                 case "update": {
-                    System.out.println("update Menu");
+                    if (options.length<5){
+                        System.out.println("More information please!");
+                    }else {
+                        MenuUpdate.updateMenu(options);
+                    }
                     break;
                 }
 
@@ -49,14 +53,17 @@ public class Menu {
                      }
                     break;
                 }
-
                 case "convert": {
                     System.out.println("convert");
                     break;
                 }
 
                 case "list": {
-                    System.out.println("list");
+                    if (options.length < 2){
+                        System.out.println("More information please!");
+                    }else {
+                        MenuList.listMenu(options);
+                    }
                     break;
                 }
 
@@ -82,7 +89,7 @@ public class Menu {
                 }
 
                 default: {
-                    System.out.println("default");
+                    System.out.println("Error in command! Please write 'help' for see all commands...");
                 }
             }
         }while(!options[0].equals("exit"));

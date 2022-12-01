@@ -9,7 +9,6 @@ public class MenuLink {
 
     public static void createNew(String option){
         switch (option) {
-
             case "opportunity": {
                 System.out.println("Link oportunity");
                 break;

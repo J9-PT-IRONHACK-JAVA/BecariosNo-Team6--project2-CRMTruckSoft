@@ -1,31 +1,31 @@
 package com.ironhack.team6crm.service;
 
 public class MenuReport {
-    public static void reportsMenu(String[] object){
+    public static void reportsMenu(String[] options){
 
-        switch (object[1]){
+        switch (options[1]){
             case "lead":{
-                System.out.println("lead");
+                System.out.println("Report lead");
                 break;
             }
             case "opportunity":{
-                System.out.println("opportunity");
+                System.out.println("Report opportunity");
                 break;
             }
             case "close-won":{
-                System.out.println("close-won");
+                System.out.println("Report close-won");
                 break;
             }
             case "close-lost":{
-                System.out.println("close-lost");
+                System.out.println("Report close-lost");
                 break;
             }
             case "open":{
-                System.out.println("open");
+                System.out.println("Report open");
                 break;
             }
             case "stats":{
-                System.out.println("stats");
+                System.out.println("Report stats");
                 break;
             }
             default:{
