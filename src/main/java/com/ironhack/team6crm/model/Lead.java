@@ -34,4 +34,5 @@ public class Lead {
         this.email = email;
         this.companyName = companyName;
     }
+
 }
