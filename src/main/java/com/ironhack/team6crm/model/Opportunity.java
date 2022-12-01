@@ -16,7 +16,7 @@ public class Opportunity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Product product;
 
     private int quantity;
@@ -33,7 +33,7 @@ public class Opportunity {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Status status;
 
 

@@ -1,12 +1,18 @@
 package com.ironhack.team6crm.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Scanner;
-
+@Service
 public class Menu {
+    @Autowired
+    MenuList menuList;
+    @Autowired
+    MenuLookup menuLookup;
+    private final Scanner scanner = new Scanner(System.in);
 
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void run(){
+    public void run(){
 
         String input;
         String[] options;
@@ -19,19 +25,21 @@ public class Menu {
             options = input.split(" ");
 
             switch (options[0]) {
-
-
                 case "lookup": {
                     if (options.length<3){
                         System.out.println("More information please!");
                     }else {
-                        MenuLookup.lookupMenu(options);
+                        menuLookup.lookupMenu(options);
                     }
                     break;
                 }
 
                 case "update": {
-                    System.out.println("update Menu");
+                    if (options.length<5){
+                        System.out.println("More information please!");
+                    }else {
+                        MenuUpdate.updateMenu(options);
+                    }
                     break;
                 }
 
@@ -47,18 +55,21 @@ public class Menu {
                     if (options.length < 3){
                     System.out.println("More information please!");
                     }else {
-                    MenuReport.reportsMenu();
+                    MenuReport.reportsMenu(options);
                      }
                     break;
                 }
-
                 case "convert": {
                     System.out.println("convert");
                     break;
                 }
 
                 case "list": {
-                    System.out.println("list");
+                    if (options.length < 2){
+                        System.out.println("More information please!");
+                    }else {
+                        menuList.listMenu(options);
+                    }
                     break;
                 }
 
@@ -84,7 +95,7 @@ public class Menu {
                 }
 
                 default: {
-                    System.out.println("default");
+                    System.out.println("Error in command! Please write 'help' for see all commands...");
                 }
             }
         }while(!options[0].equals("exit"));

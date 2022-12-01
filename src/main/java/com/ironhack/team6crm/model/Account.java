@@ -17,6 +17,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Enumerated(EnumType.STRING)
     private Industry industry;
     private int employeeCount;
     private String city;
@@ -32,12 +33,10 @@ public class Account {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    public Account(Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+    public Account(Industry industry, int employeeCount, String city, String country) {
         this.industry = industry;
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
-        this.contactList = contactList;
-        this.opportunityList = opportunityList;
     }
 }
