@@ -32,9 +32,7 @@ public class Team6CrmApplication implements CommandLineRunner {
                 new Lead("Five Five","+34 5555555","mail555@gmail.com","BARZA"),
                 new Lead("Six Six","+34 666666","mail666@gmail.com","CEPSSA")
         );
-        //leadRepository.saveAll(listOfLeads);
-
-
+        leadRepository.saveAll(listOfLeads);
         mainMenu.run();
     }
 }
