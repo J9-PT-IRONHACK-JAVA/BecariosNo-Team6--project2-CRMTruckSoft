@@ -1,22 +1,42 @@
 package com.ironhack.team6crm.service;
 
+import com.ironhack.team6crm.repository.AccountRepository;
+import com.ironhack.team6crm.repository.ContactRepository;
+import com.ironhack.team6crm.repository.LeadRepository;
+import com.ironhack.team6crm.repository.OpportunityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class MenuLookup {
-    public static void lookupMenu(String[] options){
+    @Autowired
+    LeadRepository leadRepository;
+    @Autowired
+    OpportunityRepository opportunityRepository;
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    ContactRepository contactRepository;
+    public void lookupMenu(String[] options){
         switch (options[1]){
             case "lead":{
-                System.out.println("Lookup lead");
+                System.out.println("Lookup lead Nº "+options[2]);
+                System.out.println(leadRepository.findById(Long.valueOf(options[2])).toString());
                 break;
             }
             case "opportunity":{
-                System.out.println("Lookup opportunity");
+                System.out.println("Lookup Opportunity Nº "+options[2]);
+                System.out.println(opportunityRepository.findById(Long.valueOf(options[2])).toString());
                 break;
             }
             case "account":{
-                System.out.println("Lookup account");
+                System.out.println("Lookup Account Nº "+options[2]);
+                System.out.println(accountRepository.findById(Long.valueOf(options[2])).toString());
                 break;
             }
             case "contact":{
-                System.out.println("Lookup contact");
+                System.out.println("Lookup Contact Nº "+options[2]);
+                System.out.println(contactRepository.findById(Long.valueOf(options[2])).toString());
                 break;
             }
             default:{

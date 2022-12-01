@@ -1,12 +1,18 @@
 package com.ironhack.team6crm.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.Scanner;
-
+@Service
 public class Menu {
+    @Autowired
+    MenuList menuList;
+    @Autowired
+    MenuLookup menuLookup;
+    private final Scanner scanner = new Scanner(System.in);
 
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public static void run(){
+    public void run(){
 
         String input;
         String[] options;
@@ -23,7 +29,7 @@ public class Menu {
                     if (options.length<3){
                         System.out.println("More information please!");
                     }else {
-                        MenuLookup.lookupMenu(options);
+                        menuLookup.lookupMenu(options);
                     }
                     break;
                 }
@@ -62,7 +68,7 @@ public class Menu {
                     if (options.length < 2){
                         System.out.println("More information please!");
                     }else {
-                        MenuList.listMenu(options);
+                        menuList.listMenu(options);
                     }
                     break;
                 }
