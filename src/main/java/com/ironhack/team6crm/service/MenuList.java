@@ -8,20 +8,18 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+@RequiredArgsConstructor
 @Service
 public class MenuList {
-    @Autowired
-    LeadRepository leadRepository;
-    @Autowired
-    OpportunityRepository opportunityRepository;
-    @Autowired
-    AccountRepository accountRepository;
-    @Autowired
-    ContactRepository contactRepository;
+    private final LeadRepository leadRepository;
+    private final OpportunityRepository opportunityRepository;
+    private final AccountRepository accountRepository;
+    private final ContactRepository contactRepository;
 
     public void listMenu(String[] options) {
         switch (options[1]){

@@ -1,19 +1,18 @@
 package com.ironhack.team6crm.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
+@RequiredArgsConstructor
 @Service
 public class Menu {
-    @Autowired
-    MenuList menuList;
-    @Autowired
-    MenuLookup menuLookup;
-    @Autowired
-    MenuNew menuNew;
-    @Autowired
-    MenuReport menuReport;
+
+    private final MenuList menuList;
+    private final MenuLookup menuLookup;
+    private final MenuNew menuNew;
+    private final MenuReport menuReport;
     private final Scanner scanner = new Scanner(System.in);
 
     public void run(){
