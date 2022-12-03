@@ -12,6 +12,8 @@ public class Menu {
     MenuLookup menuLookup;
     @Autowired
     MenuNew menuNew;
+    @Autowired
+    MenuReport menuReport;
     private final Scanner scanner = new Scanner(System.in);
 
     public void run(){
@@ -54,11 +56,11 @@ public class Menu {
                     break;
                 }
                 case "report": {
-                    if (options.length < 3){
-                    System.out.println("More information please!");
+                    if (options.length < 4){
+                        System.out.println("More information please!");
                     }else {
-                    MenuReport.reportsMenu(options);
-                     }
+                        menuReport.reportsMenu(options);
+                    }
                     break;
                 }
                 case "convert": {
@@ -92,17 +94,15 @@ public class Menu {
                 }
 
                 case "exit": {
-                    System.out.println("exit");
+                    System.out.println("Goodbye!");
                     break;
                 }
 
                 default: {
-                    System.out.println("Error in command! Please write 'help' for see all commands...");
+                    System.out.println("Error in command! Please write 'help' to see all commands...");
                 }
             }
         }while(!options[0].equals("exit"));
 
     }
 }
-
-
