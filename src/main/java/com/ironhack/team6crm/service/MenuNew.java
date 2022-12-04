@@ -44,7 +44,7 @@ public class MenuNew {
                     System.out.println("Pick an industry or EXIT");
                     input = scanner.nextLine();
                     int parsedInput = Integer.parseInt(input);
-                    if (parsedInput <= 5 && parsedInput >=0) {
+                    if (parsedInput < 5 && parsedInput >=0) {
                         System.out.println("You picked an industry");
                         currentIndustry=Industry.values()[parsedInput];
                         break;
