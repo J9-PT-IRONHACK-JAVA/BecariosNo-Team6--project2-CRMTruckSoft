@@ -30,4 +30,6 @@ public interface OpportunityRepository extends JpaRepository<Opportunity,Long> {
     @Query(value = "SELECT t.product, COUNT(t.id) FROM opportunity AS t where status = 'close-won' GROUP BY t.product", nativeQuery = true)
     List<Object[]> countCloseWonByProduct();
 
+
+    List<Opportunity> findAllByAccount_Id(Long account_id);
 }
