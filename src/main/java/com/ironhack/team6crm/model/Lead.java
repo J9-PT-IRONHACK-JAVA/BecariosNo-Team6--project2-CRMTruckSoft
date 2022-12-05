@@ -28,11 +28,11 @@ public class Lead {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    public Lead(String name, String phoneNumber, String email, String companyName) {
+    public Lead(String name, String phoneNumber, String email, String companyName, SalesRep salesRep) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.companyName = companyName;
+        this.salesRep = salesRep;
     }
-
 }
