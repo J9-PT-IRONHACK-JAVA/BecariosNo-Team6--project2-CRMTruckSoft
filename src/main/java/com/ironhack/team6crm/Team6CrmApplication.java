@@ -24,6 +24,7 @@ public class Team6CrmApplication implements CommandLineRunner {
     @Override
     public void run(String... args)  {
 
+<<<<<<< Updated upstream
         var listOfLeads = List.of(
                 new Lead("Number One","+34 6564532345","mail111@gmail.com","COCA COLA"),
                 new Lead("Two Two Two ","+34 234432345","mail222@gmail.com","PEPSI"),
@@ -33,6 +34,15 @@ public class Team6CrmApplication implements CommandLineRunner {
                 new Lead("Six Six","+34 666666","mail666@gmail.com","CEPSSA")
         );
         leadRepository.saveAll(listOfLeads);
+=======
+
+        var listOfSalesReps = List.of(
+                new SalesRep("Sarah"),
+                new SalesRep("Jason")
+        );
+
+        salesRepRepository.saveAll(listOfSalesReps);
+>>>>>>> Stashed changes
         mainMenu.run();
     }
 }
