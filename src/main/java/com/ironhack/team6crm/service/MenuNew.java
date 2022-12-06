@@ -6,6 +6,7 @@ import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
 import com.ironhack.team6crm.utils.InputData;
+import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class MenuNew {
     private final ContactRepository contactRepository;
     private final ContactService contactService;
     private final AccountService accountService;
-
+    private final MenuConvert menuConvert;
     private final Scanner scanner = new Scanner(System.in);
     static Industry currentIndustry= Industry.OTHER;
     static Product currentProduct= Product.BOX;
@@ -30,7 +31,7 @@ public class MenuNew {
     static Contact currentContact = null;
     static Long currentAccountId = null;
     static Account currentAccount = null;
-
+    private final Utils utils;
 
     public void createNew(String option, SalesRep salesRep){
         switch (option) {
@@ -43,7 +44,7 @@ public class MenuNew {
             }
             case "account": {
                 //Pick an industry from the enums
-                chooseIndustry();
+                menuConvert.selectIndustry();
                 //Pick a contact from the contact list or create a contact
                 chooseContact(salesRep);
                 List<String> accountData = InputData.getInputData("company name: \n", "employee count: \n", "city: \n", "country: \n");
@@ -54,7 +55,7 @@ public class MenuNew {
             }
             case "opportunity": {
                 //Pick a product from the enums
-                chooseProduct();
+                menuConvert.selectProduct();
                 List<String> opportunityData = InputData.getInputData("quantity: \n");
                 //Pick a contact from the contact list or create a contact
                 chooseContact(salesRep);
@@ -68,11 +69,20 @@ public class MenuNew {
                 break;
             }
             case "contact": {
+                var status="";
                 List<String> contactData = InputData.getInputData("name: \n", "phone number: \n", "email: \n");
-                Contact newContact= new Contact(contactData.get(0), contactData.get(1), contactData.get(2), salesRep);
-                contactRepository.save(newContact);
-                System.out.println("New contact " + contactData.get(0) + " has been successfully created");
-                break;
+
+                while (!status.equals("OK")) {
+                    System.out.println("Please introduce a valid email");
+                    List<String> email = InputData.getInputData( "email: \n");
+
+                    if (utils.validateEmail(email.get(0))) {
+                        Contact newContact= new Contact(contactData.get(0), contactData.get(1), email.get(0), salesRep);
+                        contactRepository.save(newContact);
+                        System.out.println("New contact " + contactData.get(0) + " has been successfully created");
+                        status="OK";
+                    }
+                } break;
             }
         }
     }
@@ -142,53 +152,6 @@ public class MenuNew {
         }
     }
 
-    private void chooseIndustry() {
-        var input = "";
-        while (!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("Available industries: ");
-            var industries =  List.of(Industry.PRODUCE, Industry.ECOMMERCE, Industry.MANUFACTURING, Industry.MEDICAL,Industry.OTHER);
-            for (Industry i : industries) {
-                System.out.printf("%s - %s\n", i.ordinal() , i.name());
-            }
-            System.out.println("Pick an industry or EXIT");
-            input = scanner.nextLine();
-            int parsedInput = Integer.parseInt(input);
-            if (parsedInput < 5 && parsedInput >=0) {
-                System.out.println("You picked an industry");
-                currentIndustry=Industry.values()[parsedInput];
-                break;
-            }
-            else if (!input.equalsIgnoreCase("exit")) {
-                System.out.println("Unrecognized command!");
-            } else {
-                System.exit(0);
-            }
-        }
-    }
-
-    private void chooseProduct() {
-        var input = "";
-        while (!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("Available industries: ");
-            var products =  List.of(Product.HYBRID, Product.FLATBED,Product.BOX );
-            for (Product p : products) {
-                System.out.printf("%s - %s\n", p.ordinal() , p.name());
-            }
-            System.out.println("Pick a product or EXIT");
-            input = scanner.nextLine();
-            int parsedInput = Integer.parseInt(input);
-            if (parsedInput < 3 && parsedInput >=0) {
-                System.out.println("You picked a product");
-                currentProduct=Product.values()[parsedInput];
-                break;
-            }
-            else if (!input.equalsIgnoreCase("exit")) {
-                System.out.println("Unrecognized command!");
-            } else {
-                System.exit(0);
-            }
-        }
-    }
     private void chooseStatus() {
         var input = "";
         while (!input.equalsIgnoreCase("EXIT")) {
@@ -218,15 +181,15 @@ public class MenuNew {
         var inputEmail = "";
             var newContact = new Contact();
             System.out.println("Enter the name of the contact:");
-            inputName = scanner.nextLine().trim().toLowerCase();
+            inputName = scanner.nextLine().trim();
             newContact.setName(inputName);
 
             System.out.println("Enter the phone of the contact:");
-            inputPhone = scanner.nextLine().trim().toLowerCase();
+            inputPhone = scanner.nextLine().trim();
             newContact.setPhoneNumber(inputPhone);
 
             System.out.println("Enter the email of the contact:");
-            inputEmail = scanner.nextLine().trim().toLowerCase();
+            inputEmail = scanner.nextLine().trim();
             newContact.setEmail(inputEmail);
 
             newContact.setSalesRep(salesRep);

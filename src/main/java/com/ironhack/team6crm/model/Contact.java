@@ -23,7 +23,7 @@ public class Contact {
     private String name;
     private String phoneNumber;
     @NotNull
-    //@Email(message = "Invalid Email")
+    @Email(message = "Invalid Email")
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)

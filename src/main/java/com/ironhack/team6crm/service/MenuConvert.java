@@ -96,7 +96,7 @@ public class MenuConvert {
 
     }
 
-    private Product selectProduct() {
+    public Product selectProduct() {
         Product productSelected = null;
         var input="";
         var gotcha="";
@@ -119,7 +119,7 @@ public class MenuConvert {
         } return productSelected;
     }
 
-    private Industry selectIndustry() {
+    public Industry selectIndustry() {
         Industry industrySelected = null;
         var input="";
         var gotcha="";
