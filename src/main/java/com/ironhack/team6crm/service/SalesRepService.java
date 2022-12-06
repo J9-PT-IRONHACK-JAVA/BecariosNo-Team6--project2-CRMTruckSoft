@@ -26,6 +26,10 @@ public class SalesRepService {
         return salesRepRepository.findById(selectedId);
     }
 
+    public Optional<SalesRep> findByNameIgnoreCase(String name) {
+        return salesRepRepository.findByNameIgnoreCase(name);
+    }
+
     public SalesRep save(SalesRep user) {
         return salesRepRepository.save(user);
     }

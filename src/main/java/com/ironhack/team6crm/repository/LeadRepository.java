@@ -12,7 +12,7 @@ import java.util.Map;
 @Repository
 public interface LeadRepository extends JpaRepository<Lead,Long> {
 
-    @Query(value = "SELECT t.sales_rep_id, COUNT(t.id) FROM account_lead AS t GROUP BY t.sales_rep_id", nativeQuery = true)
+    @Query(value = "SELECT sr.name, COUNT(t.id) FROM account_lead t INNER JOIN sales_rep sr ON t.sales_rep_id=sr.id GROUP BY sr.name", nativeQuery = true)
     List<Object[]> countBySalesRep();
 
 

@@ -15,9 +15,12 @@ public class Menu {
     private final MenuLookup menuLookup;
     private final MenuNew menuNew;
     private final MenuReport menuReport;
+
     private final MenuLink menuLink;
     private final Utils utils;
     private final MenuHelp menuHelp;
+    private final MenuConvert menuConvert;
+    private final MenuUpdate updateMenu;
     
     private final SalesRepService salesRepService;
     private final Scanner scanner = new Scanner(System.in);
@@ -31,18 +34,22 @@ public class Menu {
             loggedUserRoutine();
         }
 
-
     }
-    private void loggedUserRoutine(){
+    private void loggedUserRoutine() throws Exception {
+
         String input;
         String[] options;
+        String inputLowerCase;
+        String[] optionsOriginalCase;
         do {
             System.out.println("Welcome!");
             System.out.println("insert command:");
 
-            input = scanner.nextLine().trim().toLowerCase();
+            input = scanner.nextLine().trim();
+            inputLowerCase = input.toLowerCase();
 
-            options = input.split(" ");
+            options = inputLowerCase.split(" ");
+            optionsOriginalCase = input.split(" ");
 
             switch (options[0]) {
                 case "lookup": {
@@ -60,7 +67,7 @@ public class Menu {
                     if (options.length<5){
                         System.out.println("More information please!");
                     }else {
-                        MenuUpdate.updateMenu(options);
+                        updateMenu.updateMenu(options, optionsOriginalCase);
                     }
                     break;
                 }
@@ -82,7 +89,7 @@ public class Menu {
                     break;
                 }
                 case "convert": {
-                    System.out.println("convert");
+                    menuConvert.convertMenu(options);
                     break;
                 }
 
