@@ -7,6 +7,9 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.ConsoleColors;
+import com.ironhack.team6crm.utils.UtilPrints;
+import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +22,10 @@ public class MenuUpdate {
     private final AccountRepository accountRepository;
     private final ContactRepository contactRepository;
     private final SalesRepService salesRepService;
+    private final MenuLookup lookUp;
+    private final UtilPrints utilPrints;
 
-    public  void updateMenu(String[] options, String[] optionsOriginalCase) throws Exception {
+    public void updateMenu(String[] options, String[] optionsOriginalCase) throws Exception {
         var fieldData = optionsOriginalCase[4];
         if (optionsOriginalCase.length >5) {
             for (int i = 5; i < optionsOriginalCase.length; i++) {
@@ -62,10 +67,11 @@ public class MenuUpdate {
                         System.out.println("Invalid command!");
                     }
                 }
+                lookUp.lookupMenu(new String[]{"lookup", "lead",leadToUpdate.getId().toString()});
                 break;
             }
             case "opportunity":{
-                var oppToUpdate = opportunityRepository.findById(Long.valueOf(options[2])).orElseThrow(()-> new Exception("Lead not found in DB"));
+                var oppToUpdate = opportunityRepository.findById(Long.valueOf(options[2])).orElseThrow(()-> new Exception("Opportunity not found in DB"));
                 switch (options[3]) {
                     case "product": {
                         oppToUpdate.setProduct(Product.valueOf(fieldData.toUpperCase()));
@@ -98,6 +104,7 @@ public class MenuUpdate {
                         System.out.println("Invalid command!");
                     }
                 }
+                lookUp.lookupMenu(new String[]{"lookup", "opportunity",oppToUpdate.getId().toString()});
                 break;
             }
             case "account":{
@@ -138,6 +145,7 @@ public class MenuUpdate {
                         System.out.println("Invalid command!");
                     }
                 }
+                lookUp.lookupMenu(new String[]{"lookup", "account",accountToUpdate.getId().toString()});
                 break;
             }
             case "contact":{
@@ -168,13 +176,13 @@ public class MenuUpdate {
                         System.out.println("Invalid command!");
                     }
                 }
+                lookUp.lookupMenu(new String[]{"lookup", "contact",contactToUpdate.getId().toString()});
                 break;
             }
             default:{
-                System.out.println("Please more info!");
+                utilPrints.invalidCommand();
             }
         }
     }
-
 
 }
