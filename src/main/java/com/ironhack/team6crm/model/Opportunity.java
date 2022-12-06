@@ -45,4 +45,11 @@ public class Opportunity {
         this.status = status;
     }
 
+    public Opportunity(Product product, int quantity, Contact decisionMaker, SalesRep salesRep, Status status) {
+        this.product = product;
+        this.quantity = quantity;
+        this.decisionMaker = decisionMaker;
+        this.salesRep = salesRep;
+        this.status = status;
+    }
 }

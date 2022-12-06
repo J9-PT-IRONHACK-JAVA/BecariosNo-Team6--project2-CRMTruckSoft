@@ -10,7 +10,7 @@ public class InputData {
         List<String> inputData = new ArrayList<>();
         for(String question: questions) {
             System.out.println(question);
-            inputData.add(scanner.next());
+            inputData.add(scanner.nextLine());
         }
         return inputData;
     }

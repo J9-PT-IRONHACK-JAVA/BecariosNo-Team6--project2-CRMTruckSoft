@@ -63,8 +63,8 @@ public class MenuHelp {
         System.out.println("    - 'report close-lost X ' : aaaaaaaaaaaaaa.");
         System.out.println("    - 'report open X ' : bbbbbbbbbbbbbb");
         System.out.println("    - 'report stats X ' : cccccccccc");
-        utils.promptEnterKey();
-        System.out.println("For support contact: admin@crmtrucksoft.com");
+
+        System.out.println("\nFor support contact: admin@crmtrucksoft.com");
         System.out.println("**************************************");
         utils.promptEnterKey();
 
