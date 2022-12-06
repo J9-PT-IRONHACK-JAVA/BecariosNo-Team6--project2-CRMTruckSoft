@@ -4,6 +4,7 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ public class MenuReport {
     private final AccountRepository accountRepository;
     private final ContactRepository contactRepository;
     private final SalesRepService salesRepService;
+    private final Utils utils;
 
     public void reportsMenu(String[] options){
 
@@ -345,7 +347,8 @@ public class MenuReport {
     }
 
 
-    private static void printReportResult(List<Object[]> results) {
+    private void printReportResult(List<Object[]> results) {
+        utils.clearScreen();
         System.out.printf("\n%-30s %s \n", "Item", "Count");
         System.out.println("------------------------------------------");
         for (Object[] result : results) {
@@ -357,7 +360,7 @@ public class MenuReport {
         System.out.println("\n");
     }
 
-    private static int getMedian(List<Integer> results) {
+    private int getMedian(List<Integer> results) {
         int median;
         var rs = results.size();
         if (rs%2 == 1){
