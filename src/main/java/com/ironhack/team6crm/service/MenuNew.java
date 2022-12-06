@@ -5,7 +5,9 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.InputData;
+import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ public class MenuNew {
     static Long currentAccountId = null;
     static Account currentAccount = null;
     private final Utils utils;
+    private final UtilPrints utilPrints;
 
     public void createNew(String option, SalesRep salesRep){
         switch (option) {
@@ -39,7 +42,7 @@ public class MenuNew {
                 List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n");
                 Lead newLead= new Lead(leadData.get(0), leadData.get(1), leadData.get(2), leadData.get(3), salesRep);
                 leadRepository.save(newLead);
-                System.out.println("New lead " + leadData.get(0) + " has been successfully created");
+                utilPrints.printWithColor("New lead " + leadData.get(0) + " has been successfully created", ConsoleColors.GREEN);
                 break;
             }
             case "account": {
@@ -50,7 +53,7 @@ public class MenuNew {
                 List<String> accountData = InputData.getInputData("company name: \n", "employee count: \n", "city: \n", "country: \n");
                 Account newAccount= new Account(currentIndustry, accountData.get(0), Integer.parseInt(accountData.get(1)), accountData.get(2), accountData.get(3), salesRep);
                 accountRepository.save(newAccount);
-                System.out.println("New account for " + accountData.get(0) + " has been successfully created");
+                utilPrints.printWithColor("New account for " + accountData.get(0) + " has been successfully created", ConsoleColors.GREEN);
                 break;
             }
             case "opportunity": {
@@ -65,7 +68,7 @@ public class MenuNew {
                 chooseAccount();
                 Opportunity newOpportunity= new Opportunity(currentProduct, Integer.parseInt(opportunityData.get(0)),currentContact, currentAccount, salesRep,currentStatus );
                 opportunityRepository.save(newOpportunity);
-                System.out.println("New opportunity has been successfully created");
+                utilPrints.printWithColor("New opportunity has been successfully created", ConsoleColors.GREEN);
                 break;
             }
             case "contact": {
@@ -73,13 +76,13 @@ public class MenuNew {
                 List<String> contactData = InputData.getInputData("name: \n", "phone number: \n", "email: \n");
 
                 while (!status.equals("OK")) {
-                    System.out.println("Please introduce a valid email");
+                    utilPrints.printWithColor("Please introduce a valid email", ConsoleColors.RED);
                     List<String> email = InputData.getInputData( "email: \n");
 
                     if (utils.validateEmail(email.get(0))) {
                         Contact newContact= new Contact(contactData.get(0), contactData.get(1), email.get(0), salesRep);
                         contactRepository.save(newContact);
-                        System.out.println("New contact " + contactData.get(0) + " has been successfully created");
+                        utilPrints.printWithColor("New contact " + contactData.get(0) + " has been successfully created", ConsoleColors.GREEN);
                         status="OK";
                     }
                 } break;
@@ -102,19 +105,19 @@ public class MenuNew {
                 var selectedId = Long.parseLong(inputContact);
                 var contactFound = contactService.findById(selectedId);
                 if (contactFound.isPresent()) {
-                    System.out.println("Valid contact picked");
+                    utilPrints.printWithColor("Valid contact picked", ConsoleColors.GREEN);
                     currentContactId =selectedId;
                     currentContact = contactFound.get();
                     break;
                 } else {
-                    System.out.println("Not a valid contact selection");
+                    utilPrints.printWithColor("Not a valid contact selection", ConsoleColors.RED);
                 }
             }else if (inputContact.equalsIgnoreCase("create")) {
                 System.out.println("you want to create an new contact");
                 createContactRoutine(salesRep);
             }
             else if (!inputContact.equalsIgnoreCase("exit")) {
-                System.out.println("Unrecognized command!");
+                utilPrints.printWithColor("Unrecognized command!", ConsoleColors.RED);
             } else {
                 System.exit(0);
             }
@@ -136,16 +139,16 @@ public class MenuNew {
                 var selectedId = Long.parseLong(inputAccount);
                 var accountFound = accountService.findById(selectedId);
                 if (accountFound.isPresent()) {
-                    System.out.println("Valid account picked");
-                    currentAccountId =selectedId;
+                    utilPrints.printWithColor("Valid account picked", ConsoleColors.BLUE);
+                    currentAccountId =selectedId;1
                     currentAccount = accountFound.get();
                     break;
                 } else {
-                    System.out.println("Not a valid account selection");
+                    utilPrints.printWithColor("Not a valid account selection", ConsoleColors.RED);
                 }
             }
             else if (!inputAccount.equalsIgnoreCase("exit")) {
-                System.out.println("Unrecognized command!");
+                utilPrints.printWithColor("Unrecognized command!", ConsoleColors.RED);
             } else {
                 System.exit(0);
             }
