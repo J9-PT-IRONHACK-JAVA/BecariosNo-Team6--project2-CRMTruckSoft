@@ -46,11 +46,11 @@ public class MenuNew {
                 break;
             }
             case "account": {
+                List<String> accountData = InputData.getInputData("Company name:", "Employee count:", "City:", "Country:");
                 //Pick an industry from the enums
                 menuConvert.selectIndustry();
                 //Pick a contact from the contact list or create a contact
                 chooseContact(salesRep);
-                List<String> accountData = InputData.getInputData("company name: \n", "employee count: \n", "city: \n", "country: \n");
                 Account newAccount= new Account(currentIndustry, accountData.get(0), Integer.parseInt(accountData.get(1)), accountData.get(2), accountData.get(3), salesRep);
                 accountRepository.save(newAccount);
                 utilPrints.printWithColor("New account for " + accountData.get(0) + " has been successfully created", ConsoleColors.GREEN);
@@ -59,7 +59,7 @@ public class MenuNew {
             case "opportunity": {
                 //Pick a product from the enums
                 menuConvert.selectProduct();
-                List<String> opportunityData = InputData.getInputData("quantity: \n");
+                List<String> opportunityData = InputData.getInputData("Quantity:");
                 //Pick a contact from the contact list or create a contact
                 chooseContact(salesRep);
                 //Pick a status from the enums
@@ -73,11 +73,11 @@ public class MenuNew {
             }
             case "contact": {
                 var status="";
-                List<String> contactData = InputData.getInputData("name: \n", "phone number: \n", "email: \n");
+                List<String> contactData = InputData.getInputData("Name:", "Phone number:", "Email:");
 
                 while (!status.equals("OK")) {
                     utilPrints.printWithColor("Please introduce a valid email", ConsoleColors.RED);
-                    List<String> email = InputData.getInputData( "email: \n");
+                    List<String> email = InputData.getInputData( "Email:");
 
                     if (utils.validateEmail(email.get(0))) {
                         Contact newContact= new Contact(contactData.get(0), contactData.get(1), email.get(0), salesRep);
@@ -92,7 +92,7 @@ public class MenuNew {
 
     private void chooseContact(SalesRep salesRep) {
         var inputContact = "";
-        while (!inputContact.equalsIgnoreCase("EXIT")) {
+        while (!inputContact.equalsIgnoreCase("EXIT")) { //TODO: Refactor para que no utilice EXIT
             System.out.println("Available contacts to connect to your account: ");
             var contacts = contactService.findAll();
             for (Contact c : contacts) {
@@ -140,7 +140,7 @@ public class MenuNew {
                 var accountFound = accountService.findById(selectedId);
                 if (accountFound.isPresent()) {
                     utilPrints.printWithColor("Valid account picked", ConsoleColors.BLUE);
-                    currentAccountId =selectedId;1
+                    currentAccountId =selectedId;
                     currentAccount = accountFound.get();
                     break;
                 } else {

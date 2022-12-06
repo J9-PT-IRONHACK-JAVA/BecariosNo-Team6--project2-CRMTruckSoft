@@ -38,7 +38,7 @@ public class Utils {
     }
 
     public void pause(int milis){
-        milis = Math.max(milis,5000);
+        milis = Math.min(milis,5000);
         try{
             Thread.sleep(milis);
         } catch (InterruptedException e) {

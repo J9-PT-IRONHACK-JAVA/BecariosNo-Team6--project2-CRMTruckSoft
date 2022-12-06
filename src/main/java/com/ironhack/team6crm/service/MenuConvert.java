@@ -109,7 +109,7 @@ public class MenuConvert {
             System.out.println("Please type your selection by number:");
 
             input = scanner.next();
-            int parsedInput = Integer.parseInt(input);
+            int parsedInput = Integer.parseInt(input); //TODO Handlear el error si no es un numero. Sea aquí o sea arriba en el scanner con un nextInt()
             if (parsedInput < Product.values().length && parsedInput >=0) {
                 productSelected=Product.values()[parsedInput];
                 gotcha="OK";
@@ -132,7 +132,7 @@ public class MenuConvert {
             System.out.println("Please type your selection by number:");
 
             input = scanner.next();
-            int parsedInput = Integer.parseInt(input);
+            int parsedInput = Integer.parseInt(input); //TODO Handlear el error si no es un numero. Sea aquí o sea arriba en el scanner con un nextInt()
             if (parsedInput < Industry.values().length && parsedInput >=0) {
                 industrySelected=Industry.values()[parsedInput];
                 gotcha="OK";

@@ -30,12 +30,13 @@ public class Menu {
     static SalesRep currentUserLogged = null;
 
     public void run() throws Exception {
+        utils.clearScreen();
         utilPrints.printLogo();
 
         while (currentUserId == null) {
             userSelectionRoutine();
             System.out.println("\nWelcome " + currentUserLogged.getName());
-            utils.pause(1000);
+            utils.pause(1500);
             loggedUserRoutine();
         }
     }
@@ -153,11 +154,9 @@ public class Menu {
             System.out.println("Pick your salesRep, CREATE a new salesRep, or EXIT");
             input = scanner.nextLine();
             if (input.matches("\\d+")) {
-                System.out.println("You picked an id");
                 var selectedId = Long.parseLong(input);
                 var salesRepFound = salesRepService.findById(selectedId);
                 if (salesRepFound.isPresent()) {
-                    System.out.println("Valid user picked");
                     currentUserId = selectedId;
                     currentUserLogged = salesRepFound.get();
                     break;
