@@ -6,6 +6,7 @@ import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
 import com.ironhack.team6crm.utils.InputData;
+import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,9 @@ public class MenuConvert {
     private final OpportunityRepository opportunityRepository;
     private final AccountRepository accountRepository;
     private final ContactRepository contactRepository;
+    private final Scanner scanner = new Scanner(System.in);
     private final MenuLookup lookUp;
+    private final Utils utils;
 
     public void convertMenu(String[] options) throws Exception {
         Long leadId=null;
@@ -60,29 +63,18 @@ public class MenuConvert {
         var storedContactFromLead = contactRepository.save(contactFromLead);
 
         //Create the Opportunity
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\nWhich product is the client interested in?\n");
-        for (Product product : Product.values()){
-            System.out.println(product);
-        }
-        System.out.println("\nPlease type your selection:");
-        var productSelected = scanner.next().trim().toLowerCase();
+        var productSelected = selectProduct();
         System.out.println("\nNumber of units:");
         var productUnits = scanner.next().trim().toLowerCase();
 
-        var newOpportunity = new Opportunity(Product.valueOf(productSelected.toUpperCase()),Integer.parseInt(productUnits),storedContactFromLead,Menu.currentUserLogged, Status.OPEN);
+        var newOpportunity = new Opportunity(productSelected,Integer.parseInt(productUnits),storedContactFromLead,Menu.currentUserLogged, Status.OPEN);
         var storedOpportunity = opportunityRepository.save(newOpportunity);
 
         //Create the Account
         System.out.println("\nPlease fill in some information about the Company, for the Account records: \n");
-        List<String> accountData = InputData.getInputData("employee count: \n", "city: \n", "country: \n");
-        System.out.println("\nWhich is the client's industry?\n");
-        for (Industry industry : Industry.values()){
-            System.out.println(industry);
-        }
-        System.out.println("Please type your selection:");
-        var industrySelected = scanner.next().trim().toLowerCase();
-        Account newAccount= new Account(Industry.valueOf(industrySelected.toUpperCase()), originLead.getCompanyName(), Integer.parseInt(accountData.get(0)), accountData.get(1), accountData.get(2), Menu.currentUserLogged);
+        List<String> accountData = InputData.getInputData("Employee count: ", "City: ", "Country: ");
+        var industrySelected = selectIndustry();
+        Account newAccount= new Account(industrySelected, originLead.getCompanyName(), Integer.parseInt(accountData.get(0)), accountData.get(1), accountData.get(2), Menu.currentUserLogged);
         var storedAccount = accountRepository.save(newAccount);
 
         //Link the Opportunity and Contact to the Account
@@ -96,9 +88,59 @@ public class MenuConvert {
 
         //Confirm process and account created with related objects.
         System.out.println("\nLead converted successfully! \n");
-        //lookUp.lookupMenu(new String[]{"lookup","account",storedAccount.getId().toString()});
-        //System.out.println(storedAccount);
+
+        utils.pause(1500);
+
+        utils.clearScreen();
+        lookUp.lookupMenu(new String[]{"lookup", "account",storedAccount.getId().toString()});
 
     }
+
+    private Product selectProduct() {
+        Product productSelected = null;
+        var input="";
+        var gotcha="";
+        while (!gotcha.equals("OK")) {
+            System.out.println("\nWhich product is the client interested in?\n");
+
+            for (Product prod : Product.values()){
+                System.out.printf("%s - %s\n", prod.ordinal() , prod.name());
+            }
+            System.out.println("Please type your selection by number:");
+
+            input = scanner.next();
+            int parsedInput = Integer.parseInt(input);
+            if (parsedInput < Product.values().length && parsedInput >=0) {
+                productSelected=Product.values()[parsedInput];
+                gotcha="OK";
+            } else {
+                System.out.println("Unrecognized command!");
+            }
+        } return productSelected;
+    }
+
+    private Industry selectIndustry() {
+        Industry industrySelected = null;
+        var input="";
+        var gotcha="";
+        while (!gotcha.equals("OK")) {
+            System.out.println("\nWhich is the client's industry?\n");
+
+            for (Industry ind : Industry.values()){
+                System.out.printf("%s - %s\n", ind.ordinal() , ind.name());
+            }
+            System.out.println("Please type your selection by number:");
+
+            input = scanner.next();
+            int parsedInput = Integer.parseInt(input);
+            if (parsedInput < Industry.values().length && parsedInput >=0) {
+                industrySelected=Industry.values()[parsedInput];
+                gotcha="OK";
+            } else {
+                System.out.println("Unrecognized command!");
+            }
+        } return industrySelected;
+    }
+
 
 }

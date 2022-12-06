@@ -1,5 +1,6 @@
 package com.ironhack.team6crm.service;
 
+import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import com.ironhack.team6crm.model.SalesRep;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class Menu {
     private final MenuHelp menuHelp;
     private final MenuConvert menuConvert;
     private final MenuUpdate updateMenu;
+    private final UtilPrints utilPrints;
     
     private final SalesRepService salesRepService;
     private final Scanner scanner = new Scanner(System.in);
@@ -28,12 +30,14 @@ public class Menu {
     static SalesRep currentUserLogged = null;
 
     public void run() throws Exception {
+        utilPrints.printLogo();
+
         while (currentUserId == null) {
             userSelectionRoutine();
-            System.out.println("Welcome " + currentUserLogged.getName());
+            System.out.println("\nWelcome " + currentUserLogged.getName());
+            utils.pause(1000);
             loggedUserRoutine();
         }
-
     }
     private void loggedUserRoutine() throws Exception {
 
@@ -42,8 +46,8 @@ public class Menu {
         String inputLowerCase;
         String[] optionsOriginalCase;
         do {
-            System.out.println("Welcome!");
-            System.out.println("insert command:");
+            utils.clearScreen();
+            System.out.println("Insert command:");
 
             input = scanner.nextLine().trim();
             inputLowerCase = input.toLowerCase();
