@@ -16,9 +16,6 @@ import java.util.List;
 public class Team6CrmApplication implements CommandLineRunner {
 
     @Autowired
-    private LeadRepository leadRepository;
-
-    @Autowired
     private SalesRepRepository salesRepRepository;
     @Autowired
     Menu mainMenu;
@@ -33,8 +30,8 @@ public class Team6CrmApplication implements CommandLineRunner {
                 new SalesRep("Jason")
         );
 
-
         salesRepRepository.saveAll(listOfSalesReps);
+
         mainMenu.run();
     }
 }
