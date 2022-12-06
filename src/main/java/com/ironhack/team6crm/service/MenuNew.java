@@ -21,7 +21,7 @@ public class MenuNew {
     private final ContactRepository contactRepository;
     private final ContactService contactService;
     private final AccountService accountService;
-
+    private final MenuConvert menuConvert;
     private final Scanner scanner = new Scanner(System.in);
     static Industry currentIndustry= Industry.OTHER;
     static Product currentProduct= Product.BOX;
@@ -43,7 +43,7 @@ public class MenuNew {
             }
             case "account": {
                 //Pick an industry from the enums
-                chooseIndustry();
+                menuConvert.s;
                 //Pick a contact from the contact list or create a contact
                 chooseContact(salesRep);
                 List<String> accountData = InputData.getInputData("company name: \n", "employee count: \n", "city: \n", "country: \n");
@@ -169,7 +169,7 @@ public class MenuNew {
     private void chooseProduct() {
         var input = "";
         while (!input.equalsIgnoreCase("EXIT")) {
-            System.out.println("Available industries: ");
+            System.out.println("Available products: ");
             var products =  List.of(Product.HYBRID, Product.FLATBED,Product.BOX );
             for (Product p : products) {
                 System.out.printf("%s - %s\n", p.ordinal() , p.name());
@@ -218,15 +218,15 @@ public class MenuNew {
         var inputEmail = "";
             var newContact = new Contact();
             System.out.println("Enter the name of the contact:");
-            inputName = scanner.nextLine().trim().toLowerCase();
+            inputName = scanner.nextLine().trim();
             newContact.setName(inputName);
 
             System.out.println("Enter the phone of the contact:");
-            inputPhone = scanner.nextLine().trim().toLowerCase();
+            inputPhone = scanner.nextLine().trim();
             newContact.setPhoneNumber(inputPhone);
 
             System.out.println("Enter the email of the contact:");
-            inputEmail = scanner.nextLine().trim().toLowerCase();
+            inputEmail = scanner.nextLine().trim();
             newContact.setEmail(inputEmail);
 
             newContact.setSalesRep(salesRep);
