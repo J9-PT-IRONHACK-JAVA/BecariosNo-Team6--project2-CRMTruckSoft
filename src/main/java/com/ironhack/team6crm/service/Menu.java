@@ -1,5 +1,6 @@
 package com.ironhack.team6crm.service;
 
+import com.ironhack.team6crm.model.SalesRep;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,19 +14,35 @@ public class Menu {
     private final MenuLookup menuLookup;
     private final MenuNew menuNew;
     private final MenuReport menuReport;
+    private final MenuConvert menuConvert;
+    private final MenuUpdate updateMenu;
+
+    private final SalesRepService salesRepService;
     private final Scanner scanner = new Scanner(System.in);
+    static Long currentUserId = null;
+    static SalesRep currentUserLogged = null;
+    public void run() throws Exception {
+        while (currentUserId == null) {
+            userSelectionRoutine();
+            System.out.println("Welcome " + currentUserLogged.getName());
+            loggedUserRoutine();
+        }
 
-    public void run(){
-
+    }
+    private void loggedUserRoutine() throws Exception {
         String input;
         String[] options;
+        String inputLowerCase;
+        String[] optionsOriginalCase;
         do {
             System.out.println("Welcome!");
             System.out.println("insert command:");
 
-            input = scanner.nextLine().trim().toLowerCase();
+            input = scanner.nextLine().trim();
+            inputLowerCase = input.toLowerCase();
 
-            options = input.split(" ");
+            options = inputLowerCase.split(" ");
+            optionsOriginalCase = input.split(" ");
 
             switch (options[0]) {
                 case "lookup": {
@@ -41,7 +58,7 @@ public class Menu {
                     if (options.length<5){
                         System.out.println("More information please!");
                     }else {
-                        MenuUpdate.updateMenu(options);
+                        updateMenu.updateMenu(options, optionsOriginalCase);
                     }
                     break;
                 }
@@ -50,7 +67,7 @@ public class Menu {
                     if(options.length < 2){
                         System.out.println("Please insert the type");
                     } else {
-                        menuNew.createNew(options[1]);
+                        menuNew.createNew(options[1], currentUserLogged);
                     }
                     break;
                 }
@@ -63,7 +80,7 @@ public class Menu {
                     break;
                 }
                 case "convert": {
-                    System.out.println("convert");
+                    menuConvert.convertMenu(options);
                     break;
                 }
 
@@ -103,5 +120,54 @@ public class Menu {
             }
         }while(!options[0].equals("exit"));
 
+    }
+    public void userSelectionRoutine() {
+        var input = "";
+        while (!input.equalsIgnoreCase("EXIT")) {
+            System.out.println("Available users: ");
+            var salesReps = salesRepService.findAll();
+            for (SalesRep s : salesReps) {
+                System.out.printf("%s - %s\n", s.getId(), s.getName());
+            }
+            System.out.println("Pick your salesRep, CREATE a new salesRep, or EXIT");
+            input = scanner.nextLine();
+            if (input.matches("\\d+")) {
+                System.out.println("You picked an id");
+                var selectedId = Long.parseLong(input);
+                var salesRepFound = salesRepService.findById(selectedId);
+                if (salesRepFound.isPresent()) {
+                    System.out.println("Valid user picked");
+                    currentUserId = selectedId;
+                    currentUserLogged = salesRepFound.get();
+                    break;
+                } else {
+                    System.out.println("Not a valid user selection");
+                }
+            }else if (input.equalsIgnoreCase("create")) {
+                System.out.println("you want to create a salesRep");
+                createUserRoutine();
+            }
+            else if (!input.equalsIgnoreCase("exit")) {
+                System.out.println("Unrecognized command!");
+            } else {
+                System.exit(0);
+            }
+        }
+
+    }
+    private void createUserRoutine() {
+        var input = "";
+        while (!input.equalsIgnoreCase("BACK")) {
+            System.out.println("Enter your name:");
+            input = scanner.nextLine();
+            if (input.isEmpty() || input.matches("\\d+")){
+                System.out.println("Invalid input!");
+            } else if(!input.equalsIgnoreCase("BACK")) {
+
+                var salesRep = salesRepService.save(new SalesRep(input.trim().toLowerCase()));
+                System.out.printf("Congrats! new SalesRep created with name: %s and id: %s\n", salesRep.getName(), salesRep.getId());
+                break;
+            }
+        }
     }
 }
