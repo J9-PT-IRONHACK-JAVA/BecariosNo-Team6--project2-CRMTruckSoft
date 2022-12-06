@@ -44,4 +44,5 @@ public class Opportunity {
         this.salesRep = salesRep;
         this.status = status;
     }
+
 }
