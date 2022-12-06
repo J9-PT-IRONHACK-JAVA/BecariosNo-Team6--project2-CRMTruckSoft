@@ -23,7 +23,7 @@ public class Contact {
     private String name;
     private String phoneNumber;
     @NotNull
-    @Email
+    //@Email(message = "Invalid Email")
     private String email;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -37,9 +37,10 @@ public class Contact {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    public Contact(String name, String phoneNumber, String email) {
+    public Contact(String name, String phoneNumber, String email, SalesRep salesRep) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.salesRep = salesRep;
     }
 }
