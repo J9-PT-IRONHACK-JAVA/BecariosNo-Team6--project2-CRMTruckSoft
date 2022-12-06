@@ -30,8 +30,17 @@ public class Utils {
         }
     }
     public void clearScreen(){
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 20; i++) {
             System.out.println("\n");
+        }
+    }
+
+    public void pause(int milis){
+        milis = Math.max(milis,5000);
+        try{
+            Thread.sleep(milis);
+        } catch (InterruptedException e) {
+            System.out.println("Sleep interrupted");
         }
     }
 

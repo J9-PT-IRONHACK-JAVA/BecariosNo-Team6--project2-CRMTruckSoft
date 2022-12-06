@@ -111,4 +111,28 @@ public class UtilPrints {
         System.out.println("*******************");
     }
 
+    public void printWithColor(String text, String color){
+        System.out.println(color + text + ConsoleColors.RESET);
+    }
+
+    public void invalidCommand(){
+        printWithColor("Invalid command!", ConsoleColors.RED);
+    }
+
+    public void printLogo(){
+        var logo = ("""
+                
+                  ______ ______  ______     _______                   _           _           ___     \s
+                 / _____|_____ \\|  ___ \\   (_______)                 | |         | |         / __)_   \s
+                | /      _____) ) | _ | |   _        ____ _   _  ____| |  _       \\ \\   ___ | |__| |_ \s
+                | |     (_____ (| || || |  | |      / ___) | | |/ ___) | / )       \\ \\ / _ \\|  __)  _)\s
+                | \\_____      | | || || |  | |_____| |   | |_| ( (___| |< (    _____) ) |_| | |  | |__\s
+                 \\______)     |_|_||_||_|   \\______)_|    \\____|\\____)_| \\_)  (______/ \\___/|_|   \\___)
+                                                                                                      \s
+                """);
+
+        printWithColor(logo, ConsoleColors.WHITE_BOLD);
+
+    }
+
 }
