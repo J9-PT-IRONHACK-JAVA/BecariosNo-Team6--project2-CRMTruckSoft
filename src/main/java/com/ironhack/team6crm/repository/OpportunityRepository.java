@@ -94,4 +94,5 @@ public interface OpportunityRepository extends JpaRepository<Opportunity,Long> {
     @Query(value = "SELECT MIN(sq.c) FROM (SELECT t.account_id, COUNT(t.id) c FROM opportunity t GROUP BY t.account_id) sq", nativeQuery = true)
     String minOppsByAccount();
 
+    List<Opportunity> findAllByAccount_Id(Long account_id);
 }

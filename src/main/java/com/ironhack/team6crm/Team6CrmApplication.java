@@ -1,10 +1,12 @@
 package com.ironhack.team6crm;
 
+
 import com.ironhack.team6crm.model.*;
 import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+
 import com.ironhack.team6crm.service.Menu;
 import com.ironhack.team6crm.service.SalesRepService;
 import com.ironhack.team6crm.utils.DataLoader;
@@ -20,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Team6CrmApplication implements CommandLineRunner {
 
+
     private final LeadRepository leadRepository;
     private final OpportunityRepository opportunityRepository;
     private final AccountRepository accountRepository;
@@ -27,6 +30,7 @@ public class Team6CrmApplication implements CommandLineRunner {
     private final SalesRepService salesRepService;
 
     private final Menu mainMenu;
+
     public static void main(String[] args) {
         SpringApplication.run(Team6CrmApplication.class, args);
     }

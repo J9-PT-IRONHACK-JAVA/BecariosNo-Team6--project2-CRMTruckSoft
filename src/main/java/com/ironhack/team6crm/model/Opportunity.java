@@ -36,5 +36,13 @@ public class Opportunity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Opportunity(Product product, int quantity, Contact decisionMaker, Account account, SalesRep salesRep, Status status) {
+        this.product = product;
+        this.quantity = quantity;
+        this.decisionMaker = decisionMaker;
+        this.account = account;
+        this.salesRep = salesRep;
+        this.status = status;
+    }
 
 }
