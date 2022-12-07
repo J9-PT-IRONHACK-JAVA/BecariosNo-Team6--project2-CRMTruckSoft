@@ -18,5 +18,4 @@ public interface AccountRepository extends JpaRepository<Account,Long> {
     String maxEmployeeCount();
     @Query(value = "SELECT MIN(t.employee_count) FROM account t", nativeQuery = true)
     String minEmployeeCount();
-
 }

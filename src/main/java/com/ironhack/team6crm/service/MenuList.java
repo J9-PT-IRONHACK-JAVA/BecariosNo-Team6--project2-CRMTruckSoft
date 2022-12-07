@@ -8,13 +8,12 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @RequiredArgsConstructor
@@ -30,67 +29,114 @@ public class MenuList {
     public void listMenu(String[] options) throws IOException {
         switch (options[1]){
             case "lead":{
-                System.out.println("List of all leads:\n================================");
                 var listOfLeads = leadRepository.findAll();
                 if (listOfLeads.isEmpty()){
-                    System.out.println("Leads table is empty...");
+                    System.out.println(ConsoleColors.RED_BOLD +"Leads table is empty..."+ ConsoleColors.RESET);
                 }else {
+                    System.out.println(ConsoleColors.YELLOW_BOLD +
+                            "LIST OF ALL LEADS\n" +
+                            "===========================================" +
+                            "========================================"+
+                            "========================================");
+                    System.out.printf("|%-3s | %-25s | %-35s | %-20s | %-25s | \n",
+                            "ID","NAME","COMPANY NAME","PHONE NUMBER","EMAIL");
+                    System.out.println("===========================================" +
+                            "========================================"+
+                            "========================================");
                     for (Lead lead : listOfLeads) {
-                        utilPrints.printLead(lead);
+                        System.out.printf("|%-3s | %-25s | %-35s | %-20s | %-25s | \n",
+                                lead.getId(),lead.getName(),lead.getCompanyName(),
+                                lead.getPhoneNumber(),lead.getEmail());
                     }
                 }
-                System.out.println("================================");
+                System.out.println("==========================================="+
+                                "========================================"+
+                                "========================================"+
+                        ConsoleColors.RESET);
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             case "opportunity":{
-                System.out.println("List of all Opportunities:\n================================");
                 var listOfAllOpportunities = opportunityRepository.findAll();
                 if (listOfAllOpportunities.isEmpty()){
-                    System.out.println("Opportunities table is empty...");
+                    System.out.println(ConsoleColors.RED_BOLD +"Opportunities table is empty..."+ ConsoleColors.RESET);
                 }else {
+                    System.out.println(ConsoleColors.YELLOW_BOLD +
+                            "LIST OF ALL OPPORTUNITIES\n" +
+                            "==================================" +
+                            "======================================================");
+                    System.out.printf("|%-3s | %-10s | %-10s | %-15s | %-35s | \n",
+                            "ID","PRODUCT","QUANTITY","STATUS","COMPANY NAME (ID)");
+                    System.out.println("==================================" +
+                            "======================================================");
                     for (Opportunity opportunity : listOfAllOpportunities) {
-                        utilPrints.printOpportunity(opportunity);
-                    }
+                        System.out.printf("|%-3s | %-10s | %-10s | %-15s | %-35s | \n",
+                                opportunity.getId(),opportunity.getProduct(),opportunity.getQuantity(),
+                                opportunity.getStatus(),
+                                opportunity.getAccount().getCompanyName()+"("+opportunity.getAccount().getId()+")");                    }
                 }
-                System.out.println("================================");
+                System.out.println("==================================" +
+                        "======================================================"+
+                        ConsoleColors.RESET);
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             case "account":{
-                System.out.println("List of all Accounts:\n================================");
                 var listOfAllAccounts = accountRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
-                    System.out.println("Account table is empty...");
+                    System.out.println(ConsoleColors.RED_BOLD+"Account table is empty..."+ConsoleColors.RESET);
                 }else {
+                    System.out.println(ConsoleColors.YELLOW_BOLD +
+                            "LIST OF ALL ACCOUNTS\n" +
+                            "==================================================" +
+                            "=================================================");
+                    System.out.printf("|%-3s | %-31s | %-25s | %-15s | %-10s | \n",
+                            "ID","COMPANY NAME","LOCATION","INDUSTRY","EMPLOYEES");
+                    System.out.println("==================================================" +
+                            "=================================================");
                     for (Account account : listOfAllAccounts) {
-                        utilPrints.printAccount(account);
-                    }
+                        System.out.printf("|%-3s | %-31s | %-25s | %-15s | %-10s | \n",
+                                account.getId(),account.getCompanyName(),
+                                account.getCity()+"("+account.getCountry()+")",
+                                account.getIndustry(),account.getEmployeeCount());                    }
                 }
-                System.out.println("================================");
+                System.out.println("==================================================" +
+                        "=================================================");
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             case "contact":{
-                System.out.println("List of all Contacts:\n================================");
                 var listOfAllAccounts = contactRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
-                    System.out.println("Contacts table is empty...");
+                    System.out.println(ConsoleColors.RED_BOLD+"Contacts table is empty..."+ConsoleColors.RESET);
                 }else {
+                    System.out.println(ConsoleColors.YELLOW_BOLD +
+                            "LIST OF ALL CONTACTS\n" +
+                            "====================================================" +
+                            "===============================================================");
+                    System.out.printf("|%-3s | %-22s | %-15s | %-25s | %-35s | \n",
+                            "ID","CONTACT NAME","PHONE NUMBER","EMAIL","COMPANY");
+                    System.out.println("====================================================" +
+                            "===============================================================");
+
                     for (Contact contact : listOfAllAccounts) {
-                        utilPrints.printContact(contact);
-                    }
+                        System.out.printf("|%-3s | %-22s | %-15s | %-25s | %-35s | \n",
+                                contact.getId(),contact.getName(),contact.getPhoneNumber(),
+                                contact.getEmail(),contact.getAccount().getCompanyName());                    }
                 }
-                System.out.println("================================");
+                System.out.println("====================================================" +
+                        "===============================================================");
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             default:{
-                System.out.println("Please put the command complete, for more information type 'help'.");
+                System.out.println(ConsoleColors.RED_BOLD+
+                        "Please put the command complete, for more information type 'help'."+
+                        ConsoleColors.RESET);
                 utils.promptEnterKey();
                 utils.clearScreen();
             }
