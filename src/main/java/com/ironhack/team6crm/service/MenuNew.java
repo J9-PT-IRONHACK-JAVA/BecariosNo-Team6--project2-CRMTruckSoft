@@ -40,11 +40,20 @@ public class MenuNew {
     public void createNew(String option, SalesRep salesRep) throws IOException {
         switch (option) {
             case "lead": {
-                List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n");
-                Lead newLead= new Lead(leadData.get(0), leadData.get(1), leadData.get(2), leadData.get(3), salesRep);
-                leadRepository.save(newLead);
-                utilPrints.printWithColor("New lead " + leadData.get(0) + " has been successfully created", ConsoleColors.GREEN);
-                break;
+                var isValidEmail="";
+                List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n","company name: \n" );
+
+                while (!isValidEmail.equals("OK")) {
+                    utilPrints.printWithColor("Please introduce a valid email", ConsoleColors.RED);
+                    List<String> email = InputData.getInputData( "email:");
+
+                    if (utils.validateEmail(email.get(0))) {
+                        Lead newLead= new Lead(leadData.get(0), leadData.get(1), email.get(0), leadData.get(2), salesRep);
+                        leadRepository.save(newLead);
+                        utilPrints.printWithColor("New lead " + leadData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+                        isValidEmail="OK";
+                    }
+                } break;
             }
             case "account": {
                 List<String> accountData = InputData.getInputData("Company name:", "Employee count:", "City:", "Country:");
@@ -186,26 +195,20 @@ public class MenuNew {
         }
     }
     private void createContactRoutine(SalesRep salesRep) {
-        var inputName = "";
-        var inputPhone = "";
-        var inputEmail = "";
-            var newContact = new Contact();
-            System.out.println("Enter the name of the contact:");
-            inputName = scanner.nextLine().trim();
-            newContact.setName(inputName);
+        var status="";
+        List<String> contactData = InputData.getInputData("Name:", "Phone number:", "Email:");
 
-            System.out.println("Enter the phone of the contact:");
-            inputPhone = scanner.nextLine().trim();
-            newContact.setPhoneNumber(inputPhone);
+        while (!status.equals("OK")) {
+            utilPrints.printWithColor("Please introduce a valid email", ConsoleColors.RED);
+            List<String> email = InputData.getInputData( "Email:");
 
-            System.out.println("Enter the email of the contact:");
-            inputEmail = scanner.nextLine().trim();
-            newContact.setEmail(inputEmail);
-
-            newContact.setSalesRep(salesRep);
-
-            var contact = contactService.save(newContact);
-            System.out.printf("Congrats! new contact created with name: %s and id: %s\n", contact.getName(), contact.getId());
+            if (utils.validateEmail(email.get(0))) {
+                Contact newContact= new Contact(contactData.get(0), contactData.get(1), email.get(0), salesRep);
+                contactRepository.save(newContact);
+                utilPrints.printWithColor("New contact " + contactData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+                status="OK";
+            }
+        }
     }
 }
 
