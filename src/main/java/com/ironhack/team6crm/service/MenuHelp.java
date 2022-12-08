@@ -1,9 +1,11 @@
 package com.ironhack.team6crm.service;
 
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.io.IOException;
 
 @Service
@@ -14,7 +16,7 @@ public class MenuHelp {
 
     public void help() throws IOException {
         utils.clearScreen();
-        System.out.println("""
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"""
                 
                   ______ ______  ______     _______                   _           _           ___     \s
                  / _____|_____ \\|  ___ \\   (_______)                 | |         | |         / __)_   \s
@@ -26,7 +28,7 @@ public class MenuHelp {
                 """);
         System.out.println("Version 1.0\n");
         utils.promptEnterKey();
-        System.out.println("**************************************");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +"**************************************");
         System.out.println("\nHELP MENU:");
         System.out.println("\n- 'help'");
         System.out.println("    - 'help' : Show info and help.");
@@ -45,7 +47,7 @@ public class MenuHelp {
         System.out.println("    - 'list opportunity' : List of all Opportunities.");
         System.out.println("    - 'list account' : List of all Accounts.");
         System.out.println("    - 'list contact' : List of all Contacts.");
-        utils.promptEnterKey();
+        //utils.promptEnterKey();
         System.out.println("\n- 'update' VER AQUI!!! ***************");
         System.out.println("    - 'update lead X ' : aaaaaaaaaaaaaaaaaa.");
         System.out.println("    - 'update opportunity X ' : eeeeeeeeeeeeeeeee");
@@ -55,7 +57,7 @@ public class MenuHelp {
         System.out.println("    - 'convert lead X ' : Create a New Opportunity from Lead Nº X.");
         System.out.println("\n- 'link'");
         System.out.println("    - 'link opportunity A to B' : Assign the Opportunity Nº A to Account Nº B.");
-        System.out.println("    - 'link contact A to B ' : Assign the Contact Nº A to Opportunity Nº B.");
+        System.out.println("    - 'link contact A to B ' : Assign the Contact Nº A to Account Nº B.");
         System.out.println("\n- 'report' VER AQUI!!! ***************");
         System.out.println("    - 'report lead X ' : xxxxxxxxxxxxxxxxxx");
         System.out.println("    - 'report opportunity X ' : yyyyyyyyyyyyyyy.");
@@ -64,12 +66,10 @@ public class MenuHelp {
         System.out.println("    - 'report open X ' : bbbbbbbbbbbbbb");
         System.out.println("    - 'report stats X ' : cccccccccc");
 
-        System.out.println("\nFor support contact: admin@crmtrucksoft.com");
-        System.out.println("**************************************");
+        System.out.println(ConsoleColors.BLUE + "\nFor support contact: admin@crmtrucksoft.com");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "**************************************" + ConsoleColors.RESET);
         utils.promptEnterKey();
-
         utils.clearScreen();
-
     }
 
 }
