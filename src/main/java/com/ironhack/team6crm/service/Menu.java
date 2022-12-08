@@ -1,10 +1,10 @@
 package com.ironhack.team6crm.service;
 
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import com.ironhack.team6crm.model.SalesRep;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Scanner;
@@ -35,7 +35,9 @@ public class Menu {
 
         while (currentUserId == null) {
             userSelectionRoutine();
-            System.out.println("\nWelcome " + currentUserLogged.getName());
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+
+                    "\nWelcome " + currentUserLogged.getName()+
+                    ConsoleColors.RESET);
             utils.pause(1500);
             loggedUserRoutine();
         }
@@ -48,7 +50,7 @@ public class Menu {
         String[] optionsOriginalCase;
         do {
             utils.clearScreen();
-            System.out.println("Insert command:");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT+"Insert command:"+ConsoleColors.RESET);
 
             input = scanner.nextLine().trim();
             inputLowerCase = input.toLowerCase();
@@ -59,7 +61,9 @@ public class Menu {
             switch (options[0]) {
                 case "lookup": {
                     if (options.length<3){
-                        System.out.println("More information please!");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
                         utils.promptEnterKey();
                         utils.clearScreen();
                     }else {
@@ -70,7 +74,11 @@ public class Menu {
 
                 case "update": {
                     if (options.length<5){
-                        System.out.println("More information please!");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }else {
                         updateMenu.updateMenu(options, optionsOriginalCase);
                     }
@@ -79,7 +87,11 @@ public class Menu {
 
                 case "new": {
                     if(options.length < 2){
-                        System.out.println("Please insert the type");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     } else {
                         menuNew.createNew(options[1], currentUserLogged);
                     }
@@ -87,7 +99,11 @@ public class Menu {
                 }
                 case "report": {
                     if (options.length < 4){
-                        System.out.println("More information please!");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }else {
                         menuReport.reportsMenu(options);
                     }
@@ -100,7 +116,9 @@ public class Menu {
 
                 case "list": {
                     if (options.length < 2){
-                        System.out.println("More information please!");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
                         utils.promptEnterKey();
                         utils.clearScreen();
                     }else {
@@ -111,7 +129,9 @@ public class Menu {
 
                 case "link": {
                     if (options.length < 5){
-                        System.out.println("More information please!");
+                        System.out.println(ConsoleColors.RED+
+                                "More information please! For see correct command lines type 'help'. "+
+                                ConsoleColors.RESET);
                         utils.promptEnterKey();
                         utils.clearScreen();
                     }else {
@@ -137,7 +157,10 @@ public class Menu {
                 }
 
                 default: {
-                    System.out.println("Error in command! Please write 'help' to see all commands...");
+                    System.out.println(ConsoleColors.RED_BOLD+
+                            "Error in command! Please write 'help' to see all commands..."+
+                            ConsoleColors.RESET);
+                    utils.promptEnterKey();
                 }
             }
         }while(!options[0].equals("exit"));

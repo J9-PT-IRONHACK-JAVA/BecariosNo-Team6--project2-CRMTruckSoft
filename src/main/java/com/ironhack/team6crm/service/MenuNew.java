@@ -12,6 +12,7 @@ import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class MenuNew {
     private final Utils utils;
     private final UtilPrints utilPrints;
 
-    public void createNew(String option, SalesRep salesRep){
+    public void createNew(String option, SalesRep salesRep) throws IOException {
         switch (option) {
             case "lead": {
                 List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n", "company name: \n");
@@ -87,6 +88,12 @@ public class MenuNew {
                     }
                 } break;
             }
+            default:{
+                System.out.println(ConsoleColors.RED+
+                        "Please put the command complete, for more information type 'help'."+
+                        ConsoleColors.RESET);
+                utils.promptEnterKey();
+                utils.clearScreen();            }
         }
     }
 

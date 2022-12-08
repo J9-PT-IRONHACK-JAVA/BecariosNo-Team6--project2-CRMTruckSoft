@@ -1,6 +1,7 @@
 package com.ironhack.team6crm.service;
 
 import com.ironhack.team6crm.repository.*;
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +31,12 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printLead(lead);
                     } catch (Exception e) {
-                        System.out.println("Error ID Nº" + options[2] + "  does not exist. Try again with another ID...");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
+                                ConsoleColors.RESET);
                     }
                 } else {
-                    System.out.println("The ID must be Number");
+                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -47,10 +50,12 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printOpportunity(opportunity);
                     } catch (Exception e) {
-                        System.out.println("Error ID Nº" + options[2] + "  does not exist. Try again with another ID...");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
+                                ConsoleColors.RESET);
                     }
                 } else {
-                    System.out.println("The ID must be Number");
+                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -64,10 +69,12 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printAccount(account);
                     } catch (Exception e) {
-                        System.out.println("Error ID Nº" + options[2] + "  does not exist. Try again with another ID...");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
+                                ConsoleColors.RESET);
                     }
                 } else {
-                    System.out.println("The ID must be Number");
+                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -81,17 +88,21 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printContact(contact);
                     } catch (Exception e) {
-                        System.out.println("Error ID Nº" + options[2] + "  does not exist. Try again with another ID...");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
+                                ConsoleColors.RESET);
                     }
                 } else {
-                    System.out.println("The ID must be Number");
+                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             default: {
-                System.out.println("Please put the command complete, for more information type 'help'.");
+                System.out.println(ConsoleColors.RED_BOLD+
+                        "Please put the command complete, for more information type 'help'."+
+                        ConsoleColors.RESET);
                 utils.promptEnterKey();
                 utils.clearScreen();
             }

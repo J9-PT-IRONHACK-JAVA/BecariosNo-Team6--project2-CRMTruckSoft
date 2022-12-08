@@ -1,7 +1,6 @@
 package com.ironhack.team6crm;
 
 
-import com.ironhack.team6crm.model.*;
 import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
@@ -9,14 +8,11 @@ import com.ironhack.team6crm.repository.OpportunityRepository;
 
 import com.ironhack.team6crm.service.Menu;
 import com.ironhack.team6crm.service.SalesRepService;
-import com.ironhack.team6crm.utils.DataLoader;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor

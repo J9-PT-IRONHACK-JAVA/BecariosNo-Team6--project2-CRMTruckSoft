@@ -4,11 +4,12 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class MenuReport {
     private final SalesRepService salesRepService;
     private final Utils utils;
 
-    public void reportsMenu(String[] options){
+    public void reportsMenu(String[] options) throws IOException {
 
         switch (options[1]){
             case "lead":{
@@ -341,8 +342,11 @@ public class MenuReport {
                 break;
             }
             default:{
-                System.out.println("Invalid command!");
-            }
+                System.out.println(ConsoleColors.RED_BOLD+
+                        "Please put the command complete, for more information type 'help'."+
+                        ConsoleColors.RESET);
+                utils.promptEnterKey();
+                utils.clearScreen();            }
         }
     }
 

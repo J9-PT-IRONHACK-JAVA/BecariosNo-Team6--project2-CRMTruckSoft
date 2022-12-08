@@ -1,13 +1,8 @@
 package com.ironhack.team6crm.utils;
 
-import com.ironhack.team6crm.model.Account;
-import com.ironhack.team6crm.model.Contact;
-import com.ironhack.team6crm.model.Lead;
-import com.ironhack.team6crm.model.Opportunity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +19,9 @@ public class Utils {
     }
 
     public void promptEnterKey() throws IOException {
-        System.out.println("Press ENTER to continue...");
+        System.out.println(ConsoleColors.BLUE+
+                "Press ENTER to continue..."+
+                ConsoleColors.RESET);
         try{
             System.in.read();
         }catch (Exception e){

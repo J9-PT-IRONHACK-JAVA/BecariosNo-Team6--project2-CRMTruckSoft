@@ -25,6 +25,8 @@ public class MenuUpdate {
     private final MenuLookup lookUp;
     private final UtilPrints utilPrints;
 
+    private final Utils utils;
+
     public void updateMenu(String[] options, String[] optionsOriginalCase) throws Exception {
         var fieldData = optionsOriginalCase[4];
         if (optionsOriginalCase.length >5) {
@@ -64,7 +66,11 @@ public class MenuUpdate {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Please put the command complete, for more information type 'help'."+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }
                 }
                 lookUp.lookupMenu(new String[]{"lookup", "lead",leadToUpdate.getId().toString()});
@@ -101,7 +107,11 @@ public class MenuUpdate {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Please put the command complete, for more information type 'help'."+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }
                 }
                 lookUp.lookupMenu(new String[]{"lookup", "opportunity",oppToUpdate.getId().toString()});
@@ -142,7 +152,11 @@ public class MenuUpdate {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Please put the command complete, for more information type 'help'."+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }
                 }
                 lookUp.lookupMenu(new String[]{"lookup", "account",accountToUpdate.getId().toString()});
@@ -173,7 +187,11 @@ public class MenuUpdate {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        System.out.println(ConsoleColors.RED_BOLD+
+                                "Please put the command complete, for more information type 'help'."+
+                                ConsoleColors.RESET);
+                        utils.promptEnterKey();
+                        utils.clearScreen();
                     }
                 }
                 lookUp.lookupMenu(new String[]{"lookup", "contact",contactToUpdate.getId().toString()});
