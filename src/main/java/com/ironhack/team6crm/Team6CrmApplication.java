@@ -48,6 +48,6 @@ public class Team6CrmApplication implements CommandLineRunner {
         }
         opportunityRepository.saveAll(loadedOpportunities);
 
-        mainMenu.run();
+        //mainMenu.run();
     }
 }
