@@ -140,7 +140,7 @@ public class UtilPrints {
                                                                                                       \s
                 """);
 
-        printWithColor(logo, ConsoleColors.WHITE_BOLD);
+        printWithColor(logo, ConsoleColors.WHITE_BOLD_BRIGHT);
 
     }
 
