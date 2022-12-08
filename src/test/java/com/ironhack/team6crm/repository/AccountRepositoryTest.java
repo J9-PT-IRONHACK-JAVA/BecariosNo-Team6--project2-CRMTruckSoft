@@ -23,10 +23,13 @@ class AccountRepositoryTest {
     private AccountRepository accountRepository;
     @Autowired
     private SalesRepRepository salesRepRepository;
-
+    @Autowired
+    private OpportunityRepository opportunityRepository;
+    @Autowired
+    private ContactRepository contactRepository;
     @Autowired
     private SalesRepService salesRepService;
-/*
+
     @BeforeEach
     void setUp() {
         var Sarah = new SalesRep("Sarah");
@@ -45,9 +48,11 @@ class AccountRepositoryTest {
 
     @AfterEach
     void tearDown() {
+        opportunityRepository.deleteAll();
+        contactRepository.deleteAll();
         accountRepository.deleteAll();
-        salesRepRepository.deleteAll();
-    } */
+
+    }
 
     @Test
     void listEmployeeCount() {
