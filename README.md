@@ -30,7 +30,7 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 logging:
   level:
     root: off
