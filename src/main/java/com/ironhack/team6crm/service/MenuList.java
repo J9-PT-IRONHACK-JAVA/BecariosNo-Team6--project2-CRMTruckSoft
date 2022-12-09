@@ -23,15 +23,15 @@ public class MenuList {
     private final OpportunityRepository opportunityRepository;
     private final AccountRepository accountRepository;
     private final ContactRepository contactRepository;
-    private final UtilPrints utilPrints;
     private final Utils utils;
+    private final UtilPrints utilPrints;
 
     public void listMenu(String[] options) throws IOException {
         switch (options[1]){
             case "lead":{
                 var listOfLeads = leadRepository.findAll();
                 if (listOfLeads.isEmpty()){
-                    System.out.println(ConsoleColors.RED_BOLD +"Leads table is empty..."+ ConsoleColors.RESET);
+                    utilPrints.printWithColor("Leads table is empty...",ConsoleColors.RED_BOLD);
                 }else {
                     System.out.println(ConsoleColors.YELLOW_BOLD +
                             "LIST OF ALL LEADS\n" +
@@ -60,7 +60,7 @@ public class MenuList {
             case "opportunity":{
                 var listOfAllOpportunities = opportunityRepository.findAll();
                 if (listOfAllOpportunities.isEmpty()){
-                    System.out.println(ConsoleColors.RED_BOLD +"Opportunities table is empty..."+ ConsoleColors.RESET);
+                    utilPrints.printWithColor("Opportunities table is empty...",ConsoleColors.RED_BOLD);
                 }else {
                     System.out.println(ConsoleColors.YELLOW_BOLD +
                             "LIST OF ALL OPPORTUNITIES\n" +
@@ -86,7 +86,7 @@ public class MenuList {
             case "account":{
                 var listOfAllAccounts = accountRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
-                    System.out.println(ConsoleColors.RED_BOLD+"Account table is empty..."+ConsoleColors.RESET);
+                    utilPrints.printWithColor("Account table is empty...",ConsoleColors.RED_BOLD);
                 }else {
                     System.out.println(ConsoleColors.YELLOW_BOLD +
                             "LIST OF ALL ACCOUNTS\n" +
@@ -100,7 +100,8 @@ public class MenuList {
                         System.out.printf("|%-3s | %-31s | %-25s | %-15s | %-10s | \n",
                                 account.getId(),account.getCompanyName(),
                                 account.getCity()+"("+account.getCountry()+")",
-                                account.getIndustry(),account.getEmployeeCount());                    }
+                                account.getIndustry(),account.getEmployeeCount());
+                    }
                 }
                 System.out.println("==================================================" +
                         "=================================================");
@@ -111,7 +112,7 @@ public class MenuList {
             case "contact":{
                 var listOfAllAccounts = contactRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
-                    System.out.println(ConsoleColors.RED_BOLD+"Contacts table is empty..."+ConsoleColors.RESET);
+                    utilPrints.printWithColor("Contacts table is empty...",ConsoleColors.RED_BOLD);
                 }else {
                     System.out.println(ConsoleColors.YELLOW_BOLD +
                             "LIST OF ALL CONTACTS\n" +
@@ -125,7 +126,8 @@ public class MenuList {
                     for (Contact contact : listOfAllAccounts) {
                         System.out.printf("|%-3s | %-22s | %-15s | %-25s | %-35s | \n",
                                 contact.getId(),contact.getName(),contact.getPhoneNumber(),
-                                contact.getEmail(),contact.getAccount().getCompanyName());                    }
+                                contact.getEmail(),contact.getAccount().getCompanyName());
+                    }
                 }
                 System.out.println("====================================================" +
                         "===============================================================");
@@ -134,9 +136,8 @@ public class MenuList {
                 break;
             }
             default:{
-                System.out.println(ConsoleColors.RED_BOLD+
-                        "Please put the command complete, for more information type 'help'."+
-                        ConsoleColors.RESET);
+                String message = "Please put the command complete, for more information type 'help'.";
+                utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
                 utils.promptEnterKey();
                 utils.clearScreen();
             }

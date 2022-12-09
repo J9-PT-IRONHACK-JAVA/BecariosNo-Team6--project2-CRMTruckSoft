@@ -5,7 +5,6 @@ import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -17,8 +16,6 @@ public class MenuLookup {
     private final OpportunityRepository opportunityRepository;
     private final AccountRepository accountRepository;
     private final ContactRepository contactRepository;
-    private final SalesRepRepository salesRepRepository;
-
     private final Utils utils;
     private final UtilPrints utilPrints;
     public void lookupMenu(String[] options) throws Exception {
@@ -31,12 +28,11 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printLead(lead);
                     } catch (Exception e) {
-                        System.out.println(ConsoleColors.RED_BOLD+
-                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
-                                ConsoleColors.RESET);
+                        String message = "Error ID Nº" + options[2] + "  does not exist. Try again with another ID...";
+                        utilPrints.printWithColor(message,ConsoleColors.RED_BOLD);
                     }
                 } else {
-                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
+                    utilPrints.printWithColor("The ID must be Number",ConsoleColors.RED_BOLD);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -50,12 +46,11 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printOpportunity(opportunity);
                     } catch (Exception e) {
-                        System.out.println(ConsoleColors.RED_BOLD+
-                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
-                                ConsoleColors.RESET);
+                        String message = "Error ID Nº" + options[2] + "  does not exist. Try again with another ID...";
+                        utilPrints.printWithColor(message,ConsoleColors.RED_BOLD);
                     }
                 } else {
-                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
+                    utilPrints.printWithColor("The ID must be Number",ConsoleColors.RED_BOLD);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -69,12 +64,11 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printAccount(account);
                     } catch (Exception e) {
-                        System.out.println(ConsoleColors.RED_BOLD+
-                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
-                                ConsoleColors.RESET);
+                        String message = "Error ID Nº" + options[2] + "  does not exist. Try again with another ID...";
+                        utilPrints.printWithColor(message,ConsoleColors.RED_BOLD);
                     }
                 } else {
-                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
+                    utilPrints.printWithColor("The ID must be Number",ConsoleColors.RED_BOLD);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
@@ -88,21 +82,19 @@ public class MenuLookup {
                                 NoSuchElementException::new);
                         utilPrints.printContact(contact);
                     } catch (Exception e) {
-                        System.out.println(ConsoleColors.RED_BOLD+
-                                "Error ID Nº" + options[2] + "  does not exist. Try again with another ID..."+
-                                ConsoleColors.RESET);
+                        String message = "Error ID Nº" + options[2] + "  does not exist. Try again with another ID...";
+                        utilPrints.printWithColor("The ID must be Number",ConsoleColors.RED_BOLD);
                     }
                 } else {
-                    System.out.println(ConsoleColors.RED_BOLD+"The ID must be Number"+ConsoleColors.RESET);
+                    utilPrints.printWithColor("The ID must be Number",ConsoleColors.RED_BOLD);
                 }
                 utils.promptEnterKey();
                 utils.clearScreen();
                 break;
             }
             default: {
-                System.out.println(ConsoleColors.RED_BOLD+
-                        "Please put the command complete, for more information type 'help'."+
-                        ConsoleColors.RESET);
+                utilPrints.printWithColor("Please put the command complete, for more information type 'help'.",
+                        ConsoleColors.RED_BOLD);
                 utils.promptEnterKey();
                 utils.clearScreen();
             }

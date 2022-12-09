@@ -2,10 +2,12 @@ package com.ironhack.team6crm.service;
 
 import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
+
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.io.IOException;
 
 @Service
@@ -17,7 +19,6 @@ public class MenuHelp {
 
     public void help() throws IOException {
         utils.clearScreen();
-
         utilPrints.printWithColor("""
                       ___       __ \s
                 |__| |__  |    |__)\s
@@ -29,6 +30,7 @@ public class MenuHelp {
         utils.promptEnterKey();
         System.out.println("**************************************");
         System.out.println("\nAVAILABLE COMMANDS:");
+
         System.out.println("\n- 'help'");
         System.out.println("    - 'help' : Show info and help.");
         System.out.println("\n- 'new'");
@@ -46,6 +48,7 @@ public class MenuHelp {
         System.out.println("    - 'list opportunity' : List of all Opportunities.");
         System.out.println("    - 'list account' : List of all Accounts.");
         System.out.println("    - 'list contact' : List of all Contacts.");
+
         utils.promptEnterKey();
         System.out.println("\n- 'update'");
         System.out.println("    The command works like this: 'update %object% #Id %property% %new value%'");
@@ -60,7 +63,7 @@ public class MenuHelp {
         System.out.println("    - 'convert lead X' : Convert Lead X (where X is the Id#) into a new Opportunity and new Contact. Then create a new Account with the associated Opportunity and Contact.");
         System.out.println("\n- 'link'");
         System.out.println("    - 'link opportunity A to B' : Assign the Opportunity # A to Account # B.");
-        System.out.println("    - 'link contact A to B' : Assign the Contact # A to Opportunity # B.");
+        System.out.println("    - 'link contact A to B' : Assign the Contact # A to Account # B.");
         System.out.println("\n- 'report' ");
         System.out.println("    - 'report lead by SalesRep' : A count of Leads by SalesRep");
         System.out.println("    - 'report opportunity by X' : A count of all Opportunities by X, where 'X' can be either SalesRep, Product, City, Country or Industry");
@@ -71,12 +74,11 @@ public class MenuHelp {
         System.out.println("    - 'report stats X productQuantity' : The X quantity of Product of all our Opportunities, where 'X' can be either mean, median, max or min.");
         System.out.println("    - 'report stats X oppsPerAccount' : The X number of opportunities linked to each of our client Accounts, where 'X' can be either mean, median, max or min.");
 
-        System.out.println("\nFor support contact: admin@crmtrucksoft.com");
-        System.out.println("**************************************");
+
+        System.out.println(ConsoleColors.BLUE + "\nFor support contact: admin@crmtrucksoft.com");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "**************************************" + ConsoleColors.RESET);
         utils.promptEnterKey();
-
         utils.clearScreen();
-
     }
 
 }
