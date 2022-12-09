@@ -1,5 +1,6 @@
-package com.ironhack.team6crm.service;
+package com.ironhack.team6crm.service.menu;
 
+import com.ironhack.team6crm.service.SalesRepService;
 import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;

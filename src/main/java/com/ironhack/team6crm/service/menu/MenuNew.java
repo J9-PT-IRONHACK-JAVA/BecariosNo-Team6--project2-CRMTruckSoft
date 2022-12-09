@@ -1,10 +1,12 @@
-package com.ironhack.team6crm.service;
+package com.ironhack.team6crm.service.menu;
 
 import com.ironhack.team6crm.model.*;
 import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.service.AccountService;
+import com.ironhack.team6crm.service.ContactService;
 import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.InputData;
 import com.ironhack.team6crm.utils.UtilPrints;
@@ -52,6 +54,7 @@ public class MenuNew {
                         leadRepository.save(newLead);
                         utilPrints.printWithColor("New lead " + leadData.get(0) + " has been successfully created", ConsoleColors.GREEN);
                         isValidEmail="OK";
+                        utils.pause(2000);
                     }
                 } break;
             }
@@ -64,6 +67,7 @@ public class MenuNew {
                 Account newAccount= new Account(currentIndustry, accountData.get(0), Integer.parseInt(accountData.get(1)), accountData.get(2), accountData.get(3), salesRep);
                 accountRepository.save(newAccount);
                 utilPrints.printWithColor("New account for " + accountData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+                utils.pause(2000);
                 break;
             }
             case "opportunity": {
@@ -79,6 +83,7 @@ public class MenuNew {
                 Opportunity newOpportunity= new Opportunity(currentProduct, Integer.parseInt(opportunityData.get(0)),currentContact, currentAccount, salesRep,currentStatus );
                 opportunityRepository.save(newOpportunity);
                 utilPrints.printWithColor("New opportunity has been successfully created", ConsoleColors.GREEN);
+                utils.pause(2000);
                 break;
             }
             case "contact": {
@@ -94,6 +99,7 @@ public class MenuNew {
                         contactRepository.save(newContact);
                         utilPrints.printWithColor("New contact " + contactData.get(0) + " has been successfully created", ConsoleColors.GREEN);
                         status="OK";
+                        utils.pause(2000);
                     }
                 } break;
             }
@@ -129,7 +135,7 @@ public class MenuNew {
                     utilPrints.printWithColor("Not a valid contact selection", ConsoleColors.RED);
                 }
             }else if (inputContact.equalsIgnoreCase("create")) {
-                System.out.println("you want to create an new contact");
+                System.out.println("You want to create an new contact");
                 createContactRoutine(salesRep);
             }
             else if (!inputContact.equalsIgnoreCase("exit")) {

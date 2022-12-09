@@ -1,4 +1,5 @@
 package com.ironhack.team6crm.repository;
+import com.ironhack.team6crm.Team6CrmApplication;
 import com.ironhack.team6crm.model.Account;
 import com.ironhack.team6crm.model.Industry;
 import com.ironhack.team6crm.model.Lead;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 
 import java.util.List;
@@ -19,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class AccountRepositoryTest {
 
+    @MockBean
+    private Team6CrmApplication team6CrmApplication;
     @Autowired
     private AccountRepository accountRepository;
     @Autowired

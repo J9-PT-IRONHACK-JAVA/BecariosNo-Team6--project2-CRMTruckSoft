@@ -1,4 +1,4 @@
-package com.ironhack.team6crm.service;
+package com.ironhack.team6crm.service.menu;
 
 import com.ironhack.team6crm.model.*;
 import com.ironhack.team6crm.repository.AccountRepository;
