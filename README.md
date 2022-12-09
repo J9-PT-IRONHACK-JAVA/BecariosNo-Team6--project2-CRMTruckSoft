@@ -45,7 +45,7 @@ Version: 1.0
 
 Developers:
 
-    - Eleni (no se tu apellido eleni!!!)
+    - Eleni Taki
     - Pau Tusell
     - Andres Martinez
 
