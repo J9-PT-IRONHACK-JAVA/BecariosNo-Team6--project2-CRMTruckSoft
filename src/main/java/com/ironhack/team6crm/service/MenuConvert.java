@@ -5,7 +5,9 @@ import com.ironhack.team6crm.repository.AccountRepository;
 import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
+import com.ironhack.team6crm.utils.ConsoleColors;
 import com.ironhack.team6crm.utils.InputData;
+import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class MenuConvert {
     private final Scanner scanner = new Scanner(System.in);
     private final MenuLookup lookUp;
     private final Utils utils;
+    private final UtilPrints utilPrints;
 
     public void convertMenu(String[] options) throws Exception {
         Long leadId=null;
@@ -34,7 +37,7 @@ public class MenuConvert {
                 System.out.println(" is not a valid ID");
             }
             convertLead(leadId);
-        } else System.out.println("Invalid input"); //TODO call util formatted error message
+        } else utilPrints.invalidCommand();
     }
 
 
@@ -55,45 +58,52 @@ public class MenuConvert {
 
 
     public void convertLead (Long id) throws Exception {
+        Lead originLead = null;
+        boolean validData = true;
+        try {
+            originLead = leadRepository.findById(id).orElseThrow(() -> new Exception("Lead not found in DB"));
+        } catch (Exception e) {
+            System.out.println(e);
+            validData=false;
+        }
 
-        var originLead = leadRepository.findById(id).orElseThrow(()-> new Exception("Lead not found in DB"));
+        if (validData) {
+            //Create the contact
+            var contactFromLead = new Contact(originLead.getName(), originLead.getPhoneNumber(), originLead.getEmail(), Menu.currentUserLogged);
+            var storedContactFromLead = contactRepository.save(contactFromLead);
 
-        //Create the contact
-        var contactFromLead = new Contact(originLead.getName(),originLead.getPhoneNumber(),originLead.getEmail(), Menu.currentUserLogged);
-        var storedContactFromLead = contactRepository.save(contactFromLead);
+            //Create the Opportunity
+            var productSelected = selectProduct();
+            System.out.println("\nNumber of units:");
+            var productUnits = scanner.next().trim().toLowerCase(); //TODO validar que sea number y no dejar seguir sino.
 
-        //Create the Opportunity
-        var productSelected = selectProduct();
-        System.out.println("\nNumber of units:");
-        var productUnits = scanner.next().trim().toLowerCase();
+            var newOpportunity = new Opportunity(productSelected, Integer.parseInt(productUnits), storedContactFromLead, Menu.currentUserLogged, Status.OPEN);
+            var storedOpportunity = opportunityRepository.save(newOpportunity);
 
-        var newOpportunity = new Opportunity(productSelected,Integer.parseInt(productUnits),storedContactFromLead,Menu.currentUserLogged, Status.OPEN);
-        var storedOpportunity = opportunityRepository.save(newOpportunity);
+            //Create the Account //TODO meter en while para que te de la info correcta de account.
+            System.out.println("\nPlease fill in some information about the Company, for the Account records: \n");
+            List<String> accountData = InputData.getInputData("Employee count: ", "City: ", "Country: ");
+            var industrySelected = selectIndustry();
+            Account newAccount = new Account(industrySelected, originLead.getCompanyName(), Integer.parseInt(accountData.get(0)), accountData.get(1), accountData.get(2), Menu.currentUserLogged);
+            var storedAccount = accountRepository.save(newAccount);
 
-        //Create the Account
-        System.out.println("\nPlease fill in some information about the Company, for the Account records: \n");
-        List<String> accountData = InputData.getInputData("Employee count: ", "City: ", "Country: ");
-        var industrySelected = selectIndustry();
-        Account newAccount= new Account(industrySelected, originLead.getCompanyName(), Integer.parseInt(accountData.get(0)), accountData.get(1), accountData.get(2), Menu.currentUserLogged);
-        var storedAccount = accountRepository.save(newAccount);
+            //Link the Opportunity and Contact to the Account
+            storedOpportunity.setAccount(storedAccount);
+            opportunityRepository.save(storedOpportunity);
+            storedContactFromLead.setAccount(storedAccount);
+            contactRepository.save(storedContactFromLead);
 
-        //Link the Opportunity and Contact to the Account
-        storedOpportunity.setAccount(storedAccount);
-        opportunityRepository.save(storedOpportunity);
-        storedContactFromLead.setAccount(storedAccount);
-        contactRepository.save(storedContactFromLead);
+            //Delete lead
+            leadRepository.delete(originLead);
 
-        //Delete lead
-        leadRepository.delete(originLead);
+            //Confirm process and account created with related objects.
+            System.out.println("\nLead converted successfully! \n");
 
-        //Confirm process and account created with related objects.
-        System.out.println("\nLead converted successfully! \n");
+            utils.pause(1500);
 
-        utils.pause(1500);
-
-        utils.clearScreen();
-        lookUp.lookupMenu(new String[]{"lookup", "account",storedAccount.getId().toString()});
-
+            utilPrints.printWithColor("New Account with associated objects:", ConsoleColors.YELLOW);
+            lookUp.lookupMenu(new String[]{"lookup", "account", storedAccount.getId().toString()});
+        }
     }
 
     public Product selectProduct() {
