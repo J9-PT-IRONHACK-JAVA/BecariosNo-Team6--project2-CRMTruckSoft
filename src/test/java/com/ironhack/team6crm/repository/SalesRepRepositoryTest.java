@@ -12,13 +12,15 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class ContactRepositoryTest {
+class SalesRepRepositoryTest {
+
     @MockBean
     private Team6CrmApplication team6CrmApplication;
     @Autowired
-    private ContactRepository contactRepository;
+    private SalesRepRepository salesRepRepository;
     @Autowired
     private Utils utils;
+
     @BeforeEach
     void setUp() {
         utils.simulateLinks();
@@ -26,18 +28,11 @@ class ContactRepositoryTest {
 
     @AfterEach
     void tearDown() {
-
-    }
-
-    @Test
-    void findAllByAccount_Id() {
-        var findContactAccount1 = contactRepository.findAllByAccount_Id(1L);
-        assertEquals(findContactAccount1.get(0).getName(),"Mike LeadOne");
     }
 
     @Test
     void findByNameIgnoreCase() {
-        var findByName = contactRepository.findByNameIgnoreCase("Mike LeadOne");
-        assertEquals(findByName.get().getName(),"Mike LeadOne");
+        var saleRepFinded = salesRepRepository.findByNameIgnoreCase("saRAH");
+        assertEquals(saleRepFinded.get().getName(),"Sarah");
     }
 }
