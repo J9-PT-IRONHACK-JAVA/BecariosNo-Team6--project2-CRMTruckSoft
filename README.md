@@ -49,4 +49,10 @@ Developers:
     - Eleni Taki
     - Pau Tusell
     - Andres Martinez
+---
 
+Links:
+
+- Use case diagram: <a name="UseCase">https://drive.google.com/file/d/1IUNUntLsh-bHfZRLfh1JLpAG6W59paRn/view?usp=sharing</a>
+- Class diagram: <a name="Class">https://drive.google.com/file/d/16F8PRQ8_2zgYN-_3TVB54eTIYihCthiY/view?usp=sharing</a>
+- LucidChart: <a name="LucidChat">https://lucid.app/lucidchart/8252f386-ab56-4fb5-bc2f-d506be0b59b3/edit?viewport_loc=-458%2C478%2C2988%2C1376%2C0_0&invitationId=inv_fb8586fb-c4ca-424c-9d72-3101e34f9202</a>
