@@ -24,60 +24,49 @@ public class DataLoader {
 
     @Bean
     void loadData() {
-        var Sarah = new SalesRep("Sarah");
-        var Peter = new SalesRep("Peter");
-        Sarah = salesRepService.save(Sarah);
-        Peter = salesRepService.save(Peter);
+        var listOfSalesReps = List.of(
+                new SalesRep("Sarah"),
+                new SalesRep("Peter"),
+                new SalesRep("Britney")
+        );
+        var savedSalesRepList = salesRepService.saveAll(listOfSalesReps);
 
         var listOfLeads = List.of(
-                new Lead("Mike LeadOne", "+34 111111111", "mail111@gmail.com", "Man Truck SA", Sarah),
-                new Lead("Pedro LeadTwo", "+34 222222222", "mail222@gmail.com", "Ivecco Logistics SL", Sarah),
-                new Lead("William LeadThree", "+34 333333333", "mail333@gmail.com", "Pegaso Motor SA", Sarah),
-                new Lead("Erika LeadFour", "+34 444444444", "mail444@gmail.com", "Mercedes Benz Trucks SA", Peter),
-                new Lead("Olaf LeadFive", "+34 555555555", "mail555@gmail.com", "Volvo Trucking Company SA", Peter)
+                new Lead("Mike Smith", "+34 111111111", "mail111@gmail.com", "Man Truck SA", savedSalesRepList.get(0)),
+                new Lead("Wang Chen", "+34 222222222", "mail222@gmail.com", "Nissan Heavy Duty Corp", savedSalesRepList.get(0)),
+                new Lead("Jose Gonzalez", "+34 333333333", "mail333@gmail.com", "Pegaso Motor SA", savedSalesRepList.get(2)),
+                new Lead("Erika Weigang", "+34 444444444", "mail444@gmail.com", "Mercedes-Benz Trucks GmbH", savedSalesRepList.get(1)),
+                new Lead("Olaf Smorgasbord", "+34 555555555", "mail555@gmail.com", "Volvo Trucking Company AB", savedSalesRepList.get(1))
         );
         leadRepository.saveAll(listOfLeads);
         //Sarah.setLead(listOfLeads);
 
         var listOfAccounts = List.of(
-                new Account(Industry.OTHER, "Man Truck SA", 200, "Detroit", "USA", Sarah),
-                new Account(Industry.MEDICAL, "Ivecco Logistics SL", 100, "Barcelona", "ESP", Peter),
-                new Account(Industry.OTHER, "Pegaso Motor SA", 230, "London", "UK", Sarah),
-                new Account(Industry.MANUFACTURING, "Mercedes Benz Trucks SA", 1100, "Frankfurt AM", "Germany", Sarah),
-                new Account(Industry.MANUFACTURING, "Volvo Trucking Company SA", 670, "Goteborg", "Sweden", Sarah)
+                new Account("GMC Truck Inc", 200, "Detroit", "USA", Industry.OTHER, savedSalesRepList.get(0)),
+                new Account("Ivecco Logistics SL", 100, "Barcelona", "ESP", Industry.MEDICAL, savedSalesRepList.get(1)),
+                new Account("Douglas Motor Ltd", 230, "London", "UK", Industry.OTHER, savedSalesRepList.get(2)),
+                new Account("Caterpillar GmbH", 1100, "Frankfurt AM", "Germany", Industry.MANUFACTURING, savedSalesRepList.get(1)),
+                new Account("Scania AB", 670, "Goteborg", "Sweden", Industry.MANUFACTURING, savedSalesRepList.get(0))
         );
         var savedAccounts = accountRepository.saveAll(listOfAccounts);
 
         var listOfContacts = List.of(
-                new Contact("Mike LeadOne", "+34 111111111", "mail111@gmail.com", Sarah),
-                new Contact("Pedro LeadTwo", "+34 222222222", "mail222@gmail.com", Peter),
-                new Contact("William LeadThree", "+34 333333333", "mail333@gmail.com", Sarah),
-                new Contact("Erika LeadFour", "+34 444444444", "mail444@gmail.com", Sarah),
-                new Contact("Olaf LeadFive", "+34 555555555", "mail555@gmail.com", Peter)
+                new Contact("Robert Anderson", "+34 111111111", "robert@gmail.com", savedSalesRepList.get(0)),
+                new Contact("Antonio Machado", "+34 222222222", "antonio@gmail.com", savedSalesRepList.get(1)),
+                new Contact("Peter O'Toole", "+34 333333333", "peter@gmail.com", savedSalesRepList.get(0)),
+                new Contact("Franka Potente", "+34 444444444", "franka@gmail.com", savedSalesRepList.get(2)),
+                new Contact("Martin Svenson", "+34 555555555", "martin@gmail.com", savedSalesRepList.get(2))
         );
         var savedContacts = contactRepository.saveAll(listOfContacts);
 
         var listOfOpportunities = List.of(
-                new Opportunity(Product.BOX, 5, listOfContacts.get(0), Sarah, Status.OPEN),
-                new Opportunity(Product.FLATBED, 10, listOfContacts.get(1), Sarah, Status.OPEN),
-                new Opportunity(Product.BOX, 20, listOfContacts.get(2), Sarah, Status.CLOSED_LOST),
-                new Opportunity(Product.HYBRID, 8, listOfContacts.get(3), Sarah, Status.CLOSED_WON)
+                new Opportunity(Product.BOX, 5, listOfContacts.get(0), savedSalesRepList.get(0), Status.OPEN),
+                new Opportunity(Product.FLATBED, 10, listOfContacts.get(1), savedSalesRepList.get(0), Status.OPEN),
+                new Opportunity(Product.BOX, 20, listOfContacts.get(2), savedSalesRepList.get(1), Status.CLOSED_LOST),
+                new Opportunity(Product.FLATBED, 4, listOfContacts.get(3), savedSalesRepList.get(1), Status.CLOSED_LOST),
+                new Opportunity(Product.HYBRID, 8, listOfContacts.get(4), savedSalesRepList.get(2), Status.CLOSED_WON)
         );
         var savedOpportunities = opportunityRepository.saveAll(listOfOpportunities);
 
-
     }
-
-//    void linkUponLoading(List<Contact> savedContacts, List<Opportunity> savedOpportunities, List<Account> savedAccounts){
-//        for (int i = 0; i < savedContacts.size(); i++) {
-//            savedContacts.get(i).setAccount(savedAccounts.get(i));
-//        }
-//        contactRepository.saveAll(savedContacts);
-//
-//        for (int i = 0; i < savedContacts.size(); i++) {
-//            savedOpportunities.get(i).setAccount(savedAccounts.get(i));
-//        }
-//        opportunityRepository.saveAll(savedOpportunities);
-//    }
-
 }

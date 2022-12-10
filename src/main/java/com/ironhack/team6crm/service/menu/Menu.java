@@ -87,7 +87,7 @@ public class Menu {
                         utils.promptEnterKey();
                         utils.clearScreen();
                     } else {
-                        menuNew.createNew(options[1], currentUserLogged);
+                        menuNew.createNew(options[1]);
                     }
                     break;
                 }

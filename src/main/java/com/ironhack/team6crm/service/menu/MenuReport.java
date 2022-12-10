@@ -1,16 +1,14 @@
 package com.ironhack.team6crm.service.menu;
 
 import com.ironhack.team6crm.repository.AccountRepository;
-import com.ironhack.team6crm.repository.ContactRepository;
 import com.ironhack.team6crm.repository.LeadRepository;
 import com.ironhack.team6crm.repository.OpportunityRepository;
-import com.ironhack.team6crm.service.SalesRepService;
 import com.ironhack.team6crm.utils.ConsoleColors;
+import com.ironhack.team6crm.utils.UtilPrints;
 import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,18 +18,18 @@ public class MenuReport {
     private final LeadRepository leadRepository;
     private final OpportunityRepository opportunityRepository;
     private final AccountRepository accountRepository;
-    private final ContactRepository contactRepository;
-    private final SalesRepService salesRepService;
-    private final Utils utils;
 
-    public void reportsMenu(String[] options) throws IOException {
+    private final Utils utils;
+    private final UtilPrints utilPrints;
+
+    public void reportsMenu(String[] options) {
 
         switch (options[1]){
             case "lead":{
                 var target = "Lead";
                 if (options[3].equals("salesrep")) {
                     var segment = "SalesRep";
-                    System.out.printf("Report: %s by %s \n",target,segment);
+                    printReportTitle(target, segment);
                     var results = leadRepository.countBySalesRep();
                     printReportResult(results);
                 } else System.out.println("Invalid command!");
@@ -42,35 +40,35 @@ public class MenuReport {
                 switch (options[3]) {
                     case "salesrep": {
                         var segment = "SalesRep";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countBySalesRep();
                         printReportResult(results);
                         break;
                     }
                     case "product": {
                         var segment = "Product";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countByProduct();
                         printReportResult(results);
                         break;
                     }
                     case "city": {
                         var segment = "City";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countByCity();
                         printReportResult(results);
                         break;
                     }
                     case "country": {
                         var segment = "Country";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countByCountry();
                         printReportResult(results);
                         break;
                     }
                     case "industry": {
                         var segment = "Industry";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countByIndustry();
                         printReportResult(results);
                         break;
@@ -86,35 +84,35 @@ public class MenuReport {
                 switch (options[3]) {
                     case "salesrep": {
                         var segment = "SalesRep";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseWonBySalesRep();
                         printReportResult(results);
                         break;
                     }
                     case "product": {
                         var segment = "Product";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseWonByProduct();
                         printReportResult(results);
                         break;
                     }
                     case "city": {
                         var segment = "City";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseWonByCity();
                         printReportResult(results);
                         break;
                     }
                     case "country": {
                         var segment = "Country";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseWonByCountry();
                         printReportResult(results);
                         break;
                     }
                     case "industry": {
                         var segment = "Industry";
-                        System.out.printf("Report: %s by %s \n",target,segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseWonByIndustry();
                         printReportResult(results);
                         break;
@@ -130,35 +128,35 @@ public class MenuReport {
                 switch (options[3]) {
                     case "salesrep": {
                         var segment = "SalesRep";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseLostBySalesRep();
                         printReportResult(results);
                         break;
                     }
                     case "product": {
                         var segment = "Product";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseLostByProduct();
                         printReportResult(results);
                         break;
                     }
                     case "city": {
                         var segment = "City";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseLostByCity();
                         printReportResult(results);
                         break;
                     }
                     case "country": {
                         var segment = "Country";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseLostByCountry();
                         printReportResult(results);
                         break;
                     }
                     case "industry": {
                         var segment = "Industry";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countCloseLostByIndustry();
                         printReportResult(results);
                         break;
@@ -174,35 +172,35 @@ public class MenuReport {
                 switch (options[3]) {
                     case "salesrep": {
                         var segment = "SalesRep";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countOpenBySalesRep();
                         printReportResult(results);
                         break;
                     }
                     case "product": {
                         var segment = "Product";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countOpenByProduct();
                         printReportResult(results);
                         break;
                     }
                     case "city": {
                         var segment = "City";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countOpenByCity();
                         printReportResult(results);
                         break;
                     }
                     case "country": {
                         var segment = "Country";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countOpenByCountry();
                         printReportResult(results);
                         break;
                     }
                     case "industry": {
                         var segment = "Industry";
-                        System.out.printf("Report: %s by %s \n", target, segment);
+                        printReportTitle(target, segment);
                         var results = opportunityRepository.countOpenByIndustry();
                         printReportResult(results);
                         break;
@@ -221,22 +219,22 @@ public class MenuReport {
                             case "employeecount" :{
                                 var target = "Employee Count";
                                 var results = accountRepository.averageEmployeeCount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "productquantity" :{
                                 var target = "Product Quantity";
                                 var results = opportunityRepository.averageProductsPerOrder();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "oppsperaccount" :{
                                 var target = "Opportunities per Account";
                                 var results = opportunityRepository.averageOppsByAccount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             default: {
@@ -253,7 +251,7 @@ public class MenuReport {
                                 var target = "Employee Count";
                                 var results = accountRepository.listEmployeeCount();
                                 median = getMedian(results);
-                                System.out.printf("Report: %s %s \n", segment, target);
+                                printStatsTitle(segment, target);
                                 System.out.println(median + "\n");
                                 break;
                             }
@@ -261,7 +259,7 @@ public class MenuReport {
                                 var target = "Product Quantity";
                                 var results = opportunityRepository.listQuantities();
                                 median = getMedian(results);
-                                System.out.printf("Report: %s %s \n", segment, target);
+                                printStatsTitle(segment, target);
                                 System.out.println(median + "\n");
                                 break;
                             }
@@ -269,7 +267,7 @@ public class MenuReport {
                                 var target = "Opportinities per Account";
                                 var results = opportunityRepository.listOppsPerAccount();
                                 median = getMedian(results);
-                                System.out.printf("Report: %s %s \n", segment, target);
+                                printStatsTitle(segment, target);
                                 System.out.println(median + "\n");
                                 break;
                             }
@@ -285,22 +283,22 @@ public class MenuReport {
                             case "employeecount" :{
                                 var target = "Employee Count";
                                 var results = accountRepository.maxEmployeeCount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "productquantity" :{
                                 var target = "Product Quantity";
                                 var results = opportunityRepository.maxProductsPerOrder();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "oppsperaccount" :{
                                 var target = "Opportunities per Account";
                                 var results = opportunityRepository.maxOppsByAccount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             default: {
@@ -315,22 +313,22 @@ public class MenuReport {
                             case "employeecount" :{
                                 var target = "Employee Count";
                                 var results = accountRepository.minEmployeeCount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "productquantity" :{
                                 var target = "Product Quantity";
                                 var results = opportunityRepository.minProductsPerOrder();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             case "oppsperaccount" :{
                                 var target = "Opportunities per Account";
                                 var results = opportunityRepository.minOppsByAccount();
-                                System.out.printf("Report: %s %s \n", segment, target);
-                                System.out.println(results + "\n");
+                                printStatsTitle(segment, target);
+                                printStatsResult(results);
                                 break;
                             }
                             default: {
@@ -352,17 +350,35 @@ public class MenuReport {
     }
 
 
+    private void printReportTitle(String target, String segment) {
+        utilPrints.printWithColor(String.format("\nREPORT: %s by %s", target, segment), ConsoleColors.CYAN_BOLD);
+
+    }
+
+    private void printStatsTitle(String segment, String target) {
+        utilPrints.printWithColor(String.format("\nREPORT: %s by %s \n", segment, target), ConsoleColors.CYAN_BOLD);
+    }
+
     private void printReportResult(List<Object[]> results) {
-        utils.clearScreen();
-        System.out.printf("\n%-30s %s \n", "Item", "Count");
-        System.out.println("------------------------------------------");
+        utilPrints.printWithColor(String.format("""
+                        ===============================================
+                        |%-30s |%10s     | 
+                        ===============================================
+                        """, "Item", "Count"), ConsoleColors.CYAN_BOLD);
+
         for (Object[] result : results) {
             String name = result[0].toString();
             int count = Integer.parseInt(result[1].toString());
-            System.out.printf("%-30s %s \n", name, count);
-            //System.out.println(name + ": " + count);
+            utilPrints.printWithColor(String.format("|%-30s |%10s     |", name, count), ConsoleColors.CYAN_BOLD);
         }
+        utilPrints.printWithColor("===============================================", ConsoleColors.CYAN_BOLD);
         System.out.println("\n");
+        utils.promptEnterKey();
+    }
+
+    private void printStatsResult(String results) {
+        utilPrints.printWithColor(results + "\n", ConsoleColors.CYAN_BOLD);
+        utils.promptEnterKey();
     }
 
     private int getMedian(List<Integer> results) {

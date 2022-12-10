@@ -17,12 +17,12 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private Industry industry;
     private String companyName;
     private int employeeCount;
     private String city;
     private String country;
+    @Enumerated(EnumType.STRING)
+    private Industry industry;
 
     @OneToMany(mappedBy = "account")
     private List<Contact> contactList;
@@ -34,12 +34,12 @@ public class Account {
     @JoinColumn(name = "sales_rep_id")
     private SalesRep salesRep;
 
-    public Account(Industry industry, String companyName, int employeeCount, String city, String country, SalesRep salesRep) {
-        this.industry = industry;
+    public Account(String companyName, int employeeCount, String city, String country, Industry industry, SalesRep salesRep) {
         this.companyName = companyName;
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
+        this.industry = industry;
         this.salesRep = salesRep;
     }
 }

@@ -33,4 +33,8 @@ public class SalesRepService {
     public SalesRep save(SalesRep user) {
         return salesRepRepository.save(user);
     }
+
+    public List<SalesRep> saveAll(List<SalesRep> listOfSalesReps) {
+        return salesRepRepository.saveAll(listOfSalesReps);
+    }
 }
