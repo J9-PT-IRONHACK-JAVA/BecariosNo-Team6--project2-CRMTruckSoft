@@ -27,7 +27,7 @@ public class Utils {
         }
     }
 
-    public void promptEnterKey() throws IOException {
+    public void promptEnterKey() {
         System.out.println(ConsoleColors.BLUE+
                 "Press ENTER to continue..."+
                 ConsoleColors.RESET);
