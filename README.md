@@ -53,9 +53,11 @@ Developers:
 
 Links:
 
-- Use case diagram: <a name="UseCase" target="_blank">https://drive.google.com/file/d/1IUNUntLsh-bHfZRLfh1JLpAG6W59paRn/view?usp=sharing</a>
+- Use case diagram: <a target="_blank">https://drive.google.com/file/d/1IUNUntLsh-bHfZRLfh1JLpAG6W59paRn/view?usp=sharing</a>
+
 (click "Open with Diagrams.net" at the top)
-- Class diagram: <a name="Class" target="_blank">https://drive.google.com/file/d/16F8PRQ8_2zgYN-_3TVB54eTIYihCthiY/view?usp=sharing</a>
+- Class diagram: <a target="_blank">https://drive.google.com/file/d/16F8PRQ8_2zgYN-_3TVB54eTIYihCthiY/view?usp=sharing</a>
+
 (click "Open with Diagrams.net" at the top)
 
-- LucidChart: <a name="LucidChat" target="_blank">https://lucid.app/lucidchart/8252f386-ab56-4fb5-bc2f-d506be0b59b3/edit?viewport_loc=-458%2C478%2C2988%2C1376%2C0_0&invitationId=inv_fb8586fb-c4ca-424c-9d72-3101e34f9202</a>
+- LucidChart: <a target="_blank">https://lucid.app/lucidchart/8252f386-ab56-4fb5-bc2f-d506be0b59b3/edit?viewport_loc=-458%2C478%2C2988%2C1376%2C0_0&invitationId=inv_fb8586fb-c4ca-424c-9d72-3101e34f9202</a>
