@@ -17,6 +17,7 @@ public class UtilPrints {
 
     final ContactRepository contactRepository;
     final OpportunityRepository opportunityRepository;
+    final Utils utils;
 
 
     public void printLead(Lead lead){
@@ -124,8 +125,9 @@ public class UtilPrints {
         System.out.println(color + text + ConsoleColors.RESET);
     }
 
-    public void invalidCommand(){
-        printWithColor("Invalid command!", ConsoleColors.RED);
+    public void printInvalidCommand(){
+        printWithColor("Please type a valid command. For more information, type 'help'", ConsoleColors.RED);
+        utils.promptEnterKey();;
     }
 
     public void printLogo(){
