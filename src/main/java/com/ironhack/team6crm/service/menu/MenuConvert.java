@@ -37,10 +37,10 @@ public class MenuConvert {
             } catch (Exception e) {
                 System.out.println(options[2] + " is not a valid Lead #Id");
             }
-        } else utilPrints.invalidCommand();
+        } else utilPrints.printInvalidCommand();
     }
 
-    public void convertLead (Lead originLead) {
+    public void convertLead (Lead originLead) throws Exception {
 
         //Create the contact
         var contactFromLead = new Contact(originLead.getName(), originLead.getPhoneNumber(), originLead.getEmail(), Menu.currentUserLogged);

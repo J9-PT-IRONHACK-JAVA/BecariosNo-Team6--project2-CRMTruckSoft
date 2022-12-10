@@ -26,7 +26,8 @@ spring:
     url: jdbc:mysql://localhost:3306/YOUR_DATABASE_HERE
     username: USERNAME
     password: PASSWORD
-
+  main:
+    banner-mode: "off"
   jpa:
     show-sql: false
     hibernate:

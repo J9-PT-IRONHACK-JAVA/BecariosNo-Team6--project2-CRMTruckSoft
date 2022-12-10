@@ -199,7 +199,7 @@ public class MenuUpdate {
                 break;
             }
             default:{
-                utilPrints.invalidCommand();
+                utilPrints.printInvalidCommand();
             }
         }
     }

@@ -32,12 +32,12 @@ class ContactRepositoryTest {
     @Test
     void findAllByAccount_Id() {
         var findContactAccount1 = contactRepository.findAllByAccount_Id(1L);
-        assertEquals(findContactAccount1.get(0).getName(),"Mike LeadOne");
+        assertEquals(findContactAccount1.get(0).getName(),"Robert Anderson");
     }
 
     @Test
     void findByNameIgnoreCase() {
-        var findByName = contactRepository.findByNameIgnoreCase("Mike LeadOne");
-        assertEquals(findByName.get().getName(),"Mike LeadOne");
+        var findByName = contactRepository.findByNameIgnoreCase("Robert Anderson");
+        assertEquals(findByName.get().getName(),"Robert Anderson");
     }
 }

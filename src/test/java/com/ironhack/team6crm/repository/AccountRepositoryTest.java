@@ -44,11 +44,11 @@ class AccountRepositoryTest {
         Sarah = salesRepService.save(Sarah);
         Peter = salesRepService.save(Peter);
         var listOfAccounts = List.of(
-                new Account(Industry.OTHER, "Man Truck SA", 200, "Detroit", "USA", Sarah),
-                new Account(Industry.MEDICAL, "Ivecco Logistics SL", 100, "Barcelona", "ESP", Peter),
-                new Account(Industry.OTHER, "Pegaso Motor SA", 230, "London", "UK", Sarah),
-                new Account(Industry.MANUFACTURING, "Mercedes Benz Trucks SA", 1100, "Frankfurt AM", "Germany", Sarah),
-                new Account(Industry.MANUFACTURING, "Volvo Trucking Company SA", 670, "Goteborg", "Sweden", Sarah)
+                new Account("GMC Truck Inc", 200, "Detroit", "USA", Industry.OTHER, Sarah),
+                new Account("Ivecco Logistics SL", 100, "Barcelona", "ESP", Industry.MEDICAL, Sarah),
+                new Account("Douglas Motor Ltd", 230, "London", "UK", Industry.OTHER,Sarah),
+                new Account("Caterpillar GmbH", 1100, "Frankfurt AM", "Germany", Industry.MANUFACTURING, Sarah),
+                new Account("Scania AB", 670, "Goteborg", "Sweden", Industry.MANUFACTURING, Sarah)
         );
         var savedAccounts = accountRepository.saveAll(listOfAccounts);
     }

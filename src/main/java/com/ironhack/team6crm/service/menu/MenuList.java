@@ -122,11 +122,17 @@ public class MenuList {
                             "ID","CONTACT NAME","PHONE NUMBER","EMAIL","COMPANY");
                     System.out.println("====================================================" +
                             "===============================================================");
-
+                    String company;
                     for (Contact contact : listOfAllAccounts) {
+                        try{
+                            company=contact.getAccount().getCompanyName();
+
+                        }catch (Exception e){
+                            company="No company assigned yet.";
+                        }
                         System.out.printf("|%-3s | %-22s | %-15s | %-25s | %-35s | \n",
                                 contact.getId(),contact.getName(),contact.getPhoneNumber(),
-                                contact.getEmail(),contact.getAccount().getCompanyName());
+                                contact.getEmail(),company);
                     }
                 }
                 System.out.println("====================================================" +

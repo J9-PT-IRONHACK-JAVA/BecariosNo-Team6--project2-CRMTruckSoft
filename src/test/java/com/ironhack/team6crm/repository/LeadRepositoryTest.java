@@ -50,7 +50,7 @@ class LeadRepositoryTest {
     @Test
     void countBySalesRep() {
         var result = leadRepository.countBySalesRep();
-        assertEquals(2, result.size());
+        assertEquals(3, result.size());
     }
 
 
