@@ -49,13 +49,7 @@ public class MenuLink {
                         utils.clearScreen();
                         break;
                     }else {
-                        // Get list of opportunities of Account
-                        var listOfOpportunities = opportunityRepository.findAllByAccount_Id(account.get().getId());
-                        // Add the new opportunity to list
-                        listOfOpportunities.add(opportunity.get());
-                        // Update list of opportunities in account
-                        accountRepository.save(account.get());
-                        // Update account in opportunity
+                        // Set the account to opportunity
                         opportunity.get().setAccount(account.get());
                         // Save opportunity
                         opportunityRepository.save(opportunity.get());
@@ -103,13 +97,7 @@ public class MenuLink {
                         utils.clearScreen();
                         break;
                     }else {
-                        // Get list of Contacts of this Account
-                        var listOfContacts = contactRepository.findAllByAccount_Id(account.get().getId());
-                        // Add the new contact
-                        listOfContacts.add(contact.get());
-                        // Update contacts lists with new Contact
-                        account.get().setContactList(listOfContacts);
-                        accountRepository.save(account.get());
+                        // Set the account to contact
                         contact.get().setAccount(account.get());
                         contactRepository.save(contact.get());
                         String message ="Contact " + contact.get().getName() +

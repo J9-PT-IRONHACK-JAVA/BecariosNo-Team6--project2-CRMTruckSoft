@@ -29,6 +29,7 @@ public class UtilPrints {
         }
         System.out.println(ConsoleColors.YELLOW_BOLD+"\n*********************************************");
         System.out.println("Lead Nº         "+lead.getId());
+        System.out.println("Name:           "+lead.getId());
         System.out.println("Phone Number:   "+lead.getPhoneNumber());
         System.out.println("Email:          "+lead.getEmail());
         System.out.println("Company:        "+lead.getCompanyName());
@@ -67,14 +68,20 @@ public class UtilPrints {
         System.out.println("Employees:      "+account.getEmployeeCount());
         System.out.println("---------------------------------------------");
         System.out.println("Opportunities:");
-        try {
-            listOpportunitiesOfAccount(opportunityRepository.findAllByAccount_Id(account.getId()));
-        }catch (Exception e){
+        var listOfOpportunity = opportunityRepository.findAllByAccount_Id(account.getId());
+        if (!listOfOpportunity.isEmpty()) {
+            listOpportunitiesOfAccount(listOfOpportunity);
+        }else{
             System.out.println("   - The account does not have Opportunities.");
         }
         System.out.println("---------------------------------------------");
         System.out.println("Contacts:");
-        listContactsOfAccount(contactRepository.findAllByAccount_Id(account.getId()));
+        var listOfAllContact = contactRepository.findAllByAccount_Id(account.getId());
+        if(!listOfAllContact.isEmpty()) {
+            listContactsOfAccount(listOfAllContact);
+        }else{
+            System.out.println("   - The account does not have Contacts.");
+        }
         System.out.println("---------------------------------------------");
         System.out.println("User Sales:     "+account.getSalesRep().getName());
         System.out.println("*********************************************\n"+ ConsoleColors.RESET);

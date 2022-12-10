@@ -30,13 +30,13 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 logging:
   level:
     root: off
 
 ```
-Run the file Team6CrmApplication with your editor, and enjoy! # Esto habria que modificarlo, que genere un JAR y ejecutar el JAR
+Run the file Team6CrmApplication with your editor, and enjoy! 
 
 For see all the available commands type 'help' in the 'Insert command:' line.
 

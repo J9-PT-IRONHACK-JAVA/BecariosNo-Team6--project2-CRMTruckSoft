@@ -5,6 +5,9 @@ spring:
     password: 1r0nh4ck3r
 
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: create
+logging:
+  level:
+    root: off

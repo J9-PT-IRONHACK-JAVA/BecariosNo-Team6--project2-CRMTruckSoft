@@ -7,7 +7,6 @@ import com.ironhack.team6crm.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.Console;
 import java.io.IOException;
 
 @Service
