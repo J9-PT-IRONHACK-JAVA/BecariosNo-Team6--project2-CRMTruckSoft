@@ -74,7 +74,7 @@ public class MenuReport {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        utilPrints.printInvalidCommand();
                     }
                 }
                 break;
@@ -118,7 +118,7 @@ public class MenuReport {
                         break;
                     }
                     default :{
-                        System.out.println("Invalid command!");
+                        utilPrints.printInvalidCommand();
                     }
                 }
                 break;
@@ -162,7 +162,7 @@ public class MenuReport {
                         break;
                     }
                     default: {
-                        System.out.println("Invalid command!");
+                        utilPrints.printInvalidCommand();
                     }
                 }
                 break;
@@ -206,7 +206,7 @@ public class MenuReport {
                         break;
                     }
                     default: {
-                        System.out.println("Invalid command!");
+                        utilPrints.printInvalidCommand();
                     }
                 }
                 break;
@@ -238,7 +238,7 @@ public class MenuReport {
                                 break;
                             }
                             default: {
-                                System.out.println("Invalid command!");
+                                utilPrints.printInvalidCommand();
                             }
                         }
                         break;
@@ -252,7 +252,7 @@ public class MenuReport {
                                 var results = accountRepository.listEmployeeCount();
                                 median = getMedian(results);
                                 printStatsTitle(segment, target);
-                                System.out.println(median + "\n");
+                                printStatsResult(median);
                                 break;
                             }
                             case "productquantity" :{
@@ -260,7 +260,7 @@ public class MenuReport {
                                 var results = opportunityRepository.listQuantities();
                                 median = getMedian(results);
                                 printStatsTitle(segment, target);
-                                System.out.println(median + "\n");
+                                printStatsResult(median);
                                 break;
                             }
                             case "oppsperaccount" :{
@@ -268,11 +268,11 @@ public class MenuReport {
                                 var results = opportunityRepository.listOppsPerAccount();
                                 median = getMedian(results);
                                 printStatsTitle(segment, target);
-                                System.out.println(median + "\n");
+                                printStatsResult(median);
                                 break;
                             }
                             default: {
-                                System.out.println("Invalid command!");
+                                utilPrints.printInvalidCommand();
                             }
                         }
                         break;
@@ -302,7 +302,7 @@ public class MenuReport {
                                 break;
                             }
                             default: {
-                                System.out.println("Invalid command!");
+                                utilPrints.printInvalidCommand();
                             }
                         }
                         break;
@@ -332,7 +332,7 @@ public class MenuReport {
                                 break;
                             }
                             default: {
-                                System.out.println("Invalid command!");
+                                utilPrints.printInvalidCommand();
                             }
                         }
                         break;
@@ -341,11 +341,8 @@ public class MenuReport {
                 break;
             }
             default:{
-                System.out.println(ConsoleColors.RED_BOLD+
-                        "Please put the command complete, for more information type 'help'."+
-                        ConsoleColors.RESET);
-                utils.promptEnterKey();
-                utils.clearScreen();            }
+                utilPrints.printInvalidCommand();
+            }
         }
     }
 
@@ -356,15 +353,14 @@ public class MenuReport {
     }
 
     private void printStatsTitle(String segment, String target) {
-        utilPrints.printWithColor(String.format("\nREPORT: %s by %s \n", segment, target), ConsoleColors.CYAN_BOLD);
+        utilPrints.printWithColor(String.format("\nREPORT: %s number of %s \n", segment, target), ConsoleColors.CYAN_BOLD);
     }
 
     private void printReportResult(List<Object[]> results) {
         utilPrints.printWithColor(String.format("""
                         ===============================================
                         |%-30s |%10s     | 
-                        ===============================================
-                        """, "Item", "Count"), ConsoleColors.CYAN_BOLD);
+                        ===============================================""", "Item", "Count"), ConsoleColors.CYAN_BOLD);
 
         for (Object[] result : results) {
             String name = result[0].toString();
@@ -378,6 +374,11 @@ public class MenuReport {
 
     private void printStatsResult(String results) {
         utilPrints.printWithColor(results + "\n", ConsoleColors.CYAN_BOLD);
+        utils.promptEnterKey();
+    }
+
+    private void printStatsResult(int median) {
+        utilPrints.printWithColor(median + "\n", ConsoleColors.CYAN_BOLD);
         utils.promptEnterKey();
     }
 
