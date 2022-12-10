@@ -43,7 +43,7 @@ public class MenuNew {
         switch (option) {
             case "lead": {
                 var isValidEmail="";
-                List<String> leadData = InputData.getInputData("name: \n", "phone number: \n", "email: \n","company name: \n" );
+                List<String> leadData = InputData.getInputData("name: \n","company name: \n", "phone number: \n", "email: \n" );
 
                 while (!isValidEmail.equals("OK")) {
                     utilPrints.printWithColor("Please introduce a valid email", ConsoleColors.RED);

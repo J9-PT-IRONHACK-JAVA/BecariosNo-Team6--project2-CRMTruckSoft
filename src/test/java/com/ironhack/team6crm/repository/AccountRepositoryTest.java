@@ -32,7 +32,10 @@ class AccountRepositoryTest {
     @Autowired
     private ContactRepository contactRepository;
     @Autowired
+    private LeadRepository leadRepository;
+    @Autowired
     private SalesRepService salesRepService;
+
 
     @BeforeEach
     void setUp() {
@@ -55,7 +58,8 @@ class AccountRepositoryTest {
         opportunityRepository.deleteAll();
         contactRepository.deleteAll();
         accountRepository.deleteAll();
-
+        leadRepository.deleteAll();
+        salesRepRepository.deleteAll();
     }
 
     @Test
