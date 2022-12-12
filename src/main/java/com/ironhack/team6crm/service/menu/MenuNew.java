@@ -45,18 +45,18 @@ public class MenuNew {
         switch (option) {
             case "lead": {
                 //Get the data for the lead
-                List<String> leadData = inputData.getInputData("Name: ", "Phone number: ");
+                List<String> leadData = inputData.getInputData("\nName: ", "Phone number: ");
                 var email = inputData.inputEmail("Email:");
                 leadData.add(inputData.getInputData("Company name: ").get(0));
                 //Create lead
                 Lead newLead = new Lead(leadData.get(0), leadData.get(1), email, leadData.get(2), Menu.currentUserLogged);
-                leadRepository.save(newLead);
-                utilPrints.printWithColor("New lead " + leadData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+                newLead = leadRepository.save(newLead);
+                utilPrints.printWithColor("\nNew lead (id " + newLead.getId() + ") has been successfully created", ConsoleColors.GREEN);
                 utils.promptEnterKey();
                 break;
             }
             case "account": {
-                var companyName = inputData.inputString("Company name:");
+                var companyName = inputData.inputString("\nCompany name:");
                 var employeeCount = inputData.inputInteger("Employee count:");
                 List<String> accountData = inputData.getInputData("City:", "Country:");
                 //Pick an industry from the enums
@@ -67,7 +67,7 @@ public class MenuNew {
                 newAccount = accountRepository.save(newAccount);
                 initialContact.setAccount(newAccount);
                 contactRepository.save(initialContact);
-                utilPrints.printWithColor("New account for " + accountData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+                utilPrints.printWithColor("\nNew account (id " + newAccount.getId() + ") has been successfully created", ConsoleColors.GREEN);
                 utils.promptEnterKey();
                 break;
             }
@@ -82,8 +82,8 @@ public class MenuNew {
                 //Pick an account from a list
                 var relatedAccount = chooseAccount();
                 Opportunity newOpportunity= new Opportunity(product, productQuantity,decisionMaker, relatedAccount, Menu.currentUserLogged, status);
-                opportunityRepository.save(newOpportunity);
-                utilPrints.printWithColor("New opportunity has been successfully created", ConsoleColors.GREEN);
+                newOpportunity = opportunityRepository.save(newOpportunity);
+                utilPrints.printWithColor("\nNew opportunity (id " + newOpportunity.getId() + ") has been successfully created", ConsoleColors.GREEN);
                 utils.promptEnterKey();
                 break;
             }
@@ -93,7 +93,7 @@ public class MenuNew {
                 break;
             }
             default:{
-                utilPrints.printWithColor("Please type a valid command. For more information, type 'help'", ConsoleColors.RED);
+                utilPrints.printInvalidCommand();
                 utils.promptEnterKey();
             }
         }
@@ -102,12 +102,12 @@ public class MenuNew {
     private Contact chooseContact() {
         Contact contactChosen = null;
         do {
-            System.out.println("Available contacts to be linked: ");
+            System.out.println("\nAvailable contacts to be linked: ");
             var contacts = contactService.findAll();
             for (Contact c : contacts) {
                 System.out.printf("%s - %s\n", c.getId(), c.getName());
             }
-            System.out.println("Pick a contact or CREATE a new contact");
+            System.out.println("\nPick a contact or CREATE a new contact");
             var inputContact = scanner.nextLine();
             if (inputContact.matches("\\d+")) {
                 var selectedId = Long.parseLong(inputContact);
@@ -118,7 +118,7 @@ public class MenuNew {
                     utilPrints.printWithColor("Not a valid contact selection", ConsoleColors.RED);
                 }
             } else if (inputContact.equalsIgnoreCase("create")) {
-                System.out.println("OK! Let's create a new contact");
+                System.out.println("\nOK! Let's create a new contact");
                 createContact();
             } else utilPrints.printWithColor("Unrecognized command!", ConsoleColors.RED);
         } while(contactChosen==null);
@@ -129,7 +129,7 @@ public class MenuNew {
     private Account chooseAccount() {
         Account accountChosen = null;
         do {
-            System.out.println("Available accounts to connect to the opportunity: ");
+            System.out.println("\nAvailable accounts to connect to the opportunity: ");
             var accounts = accountService.findAll();
             for (Account a : accounts) {
                 System.out.printf("%s - %s\n", a.getId(), a.getCompanyName());
@@ -144,11 +144,11 @@ public class MenuNew {
     }
 
     private void createContact() {
-        List<String> contactData = inputData.getInputData("Name:", "Phone number:");
+        List<String> contactData = inputData.getInputData("\nName:", "Phone number:");
         var email = inputData.inputEmail("Email:");
         Contact newContact= new Contact(contactData.get(0), contactData.get(1), email, Menu.currentUserLogged);
-        contactRepository.save(newContact);
-        utilPrints.printWithColor("New contact " + contactData.get(0) + " has been successfully created", ConsoleColors.GREEN);
+        newContact = contactRepository.save(newContact);
+        utilPrints.printWithColor("\nNew contact (id " + newContact.getId() + ") has been successfully created", ConsoleColors.GREEN);
     }
 }
 

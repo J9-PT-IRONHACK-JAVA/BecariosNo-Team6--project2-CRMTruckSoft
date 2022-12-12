@@ -35,7 +35,7 @@ public class Menu {
         while (currentUserId == null) {
             userSelectionRoutine();
             utilPrints.printWithColor("\nWelcome " + currentUserLogged.getName(),ConsoleColors.WHITE_BOLD_BRIGHT);
-            utils.pause(1500);
+            utils.pause(1000);
             loggedUserRoutine();
         }
     }
@@ -58,10 +58,7 @@ public class Menu {
             switch (options[0]) {
                 case "lookup": {
                     if (options.length<3){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     }else {
                         menuLookup.lookupMenu(options);
                     }
@@ -70,10 +67,7 @@ public class Menu {
 
                 case "update": {
                     if (options.length<5){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     }else {
                         updateMenu.updateMenu(options, optionsOriginalCase);
                     }
@@ -82,10 +76,7 @@ public class Menu {
 
                 case "new": {
                     if(options.length < 2){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     } else {
                         menuNew.createNew(options[1]);
                     }
@@ -93,10 +84,7 @@ public class Menu {
                 }
                 case "report": {
                     if (options.length < 4){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     }else {
                         menuReport.reportsMenu(options);
                     }
@@ -109,10 +97,7 @@ public class Menu {
 
                 case "list": {
                     if (options.length < 2){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     }else {
                         menuList.listMenu(options);
                     }
@@ -121,10 +106,7 @@ public class Menu {
 
                 case "link": {
                     if (options.length < 5){
-                        String message = "More information please! For see correct command lines type 'help'. ";
-                        utilPrints.printWithColor(message, ConsoleColors.RED);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                        utilPrints.printCommandIncomplete();
                     }else {
                         menuLink.linkOpportunity(options);
                     }
@@ -136,12 +118,6 @@ public class Menu {
                     break;
                 }
 
-                //Show all options
-                case "menu": {
-                    System.out.println("menu");
-                    break;
-                }
-
                 case "exit": {
                     utilPrints.printWithColor("Goodbye!", ConsoleColors.WHITE_BOLD_BRIGHT);
                     System.exit(0);
@@ -149,10 +125,7 @@ public class Menu {
                 }
 
                 default: {
-                    String message = "Error in command! Please write 'help' to see all commands...";
-                    utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
-                    utils.promptEnterKey();
-                    utils.clearScreen();
+                    utilPrints.printCommandIncomplete();
                 }
             }
         }while(!options[0].equals("exit"));
@@ -167,7 +140,7 @@ public class Menu {
                 System.out.printf(ConsoleColors.WHITE_BOLD_BRIGHT+"%s - %s\n"+ConsoleColors.RESET
                         , s.getId(), s.getName());
             }
-            utilPrints.printWithColor("Pick your salesRep, CREATE a new salesRep, or EXIT",
+            utilPrints.printWithColor("\nPick your salesRep, CREATE a new salesRep, or EXIT",
                     ConsoleColors.WHITE_BOLD_BRIGHT);
             input = scanner.nextLine();
             if (input.matches("\\d+")) {
@@ -182,7 +155,7 @@ public class Menu {
                     System.out.println();
                 }
             }else if (input.equalsIgnoreCase("create")) {
-                utilPrints.printWithColor("you want to create a salesRep", ConsoleColors.WHITE_BOLD_BRIGHT);
+                System.out.println("\nOK! Let's create a new salesRep:");
                 createUserRoutine();
             }
             else if (!input.equalsIgnoreCase("exit")) {
@@ -196,15 +169,15 @@ public class Menu {
     private void createUserRoutine() {
         var input = "";
         while (!input.equalsIgnoreCase("BACK")) {
-            utilPrints.printWithColor("Enter your name:", ConsoleColors.WHITE_BOLD_BRIGHT);
+            System.out.println("\nEnter your name:");
             input = scanner.nextLine();
             if (input.isEmpty() || input.matches("\\d+")){
                 utilPrints.printWithColor("Invalid input!", ConsoleColors.RED);
             } else if(!input.equalsIgnoreCase("BACK")) {
 
-                var salesRep = salesRepService.save(new SalesRep(input.trim().toLowerCase()));
+                var salesRep = salesRepService.save(new SalesRep(input.trim()));
                 System.out.printf(ConsoleColors.GREEN_BOLD+
-                                "Congrats! new SalesRep created with name: %s and id: %s\n\n"+
+                                "\nCongrats! new SalesRep created with name: %s and id: %s\n\n"+
                                 ConsoleColors.RESET,
                         salesRep.getName(), salesRep.getId());
                 break;

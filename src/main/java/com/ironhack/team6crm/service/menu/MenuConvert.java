@@ -35,9 +35,9 @@ public class MenuConvert {
                 var originLead = leadRepository.findById(leadId).orElseThrow(Exception::new);
                 convertLead(originLead);
             } catch (Exception e) {
-                System.out.println(options[2] + " is not a valid Lead #Id");
+                utilPrints.printWithColor(options[2] + " is not a valid Lead #Id", ConsoleColors.RED);
             }
-        } else utilPrints.printInvalidCommand();
+        } else utilPrints.printCommandIncomplete();
     }
 
     public void convertLead (Lead originLead) throws Exception {
@@ -73,11 +73,10 @@ public class MenuConvert {
         //Confirm process and account created with related objects.
         utilPrints.printWithColor("\nLead converted successfully! \n", ConsoleColors.GREEN);
 
-        utils.pause(1500);
+        utils.pause(1000);
 
         utilPrints.printWithColor("New Account with associated objects:", ConsoleColors.YELLOW);
         lookUp.lookupMenu(new String[]{"lookup", "account", storedAccount.getId().toString()});
-        utils.promptEnterKey();
     }
 
 }

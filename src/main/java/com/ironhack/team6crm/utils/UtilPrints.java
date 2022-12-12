@@ -29,7 +29,7 @@ public class UtilPrints {
         }
         System.out.println(ConsoleColors.YELLOW_BOLD+"\n*********************************************");
         System.out.println("Lead Nº         "+lead.getId());
-        System.out.println("Name:           "+lead.getId());
+        System.out.println("Name:           "+lead.getName());
         System.out.println("Phone Number:   "+lead.getPhoneNumber());
         System.out.println("Email:          "+lead.getEmail());
         System.out.println("Company:        "+lead.getCompanyName());
@@ -134,6 +134,11 @@ public class UtilPrints {
 
     public void printInvalidCommand(){
         printWithColor("Please type a valid command. For more information, type 'help'", ConsoleColors.RED);
+        utils.promptEnterKey();;
+    }
+
+    public void printCommandIncomplete(){
+        printWithColor("Command incomplete. For more information, type 'help'", ConsoleColors.RED);
         utils.promptEnterKey();;
     }
 

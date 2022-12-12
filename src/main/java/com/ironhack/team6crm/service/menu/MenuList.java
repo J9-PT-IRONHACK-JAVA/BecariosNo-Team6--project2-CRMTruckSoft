@@ -28,7 +28,7 @@ public class MenuList {
 
     public void listMenu(String[] options) throws IOException {
         switch (options[1]){
-            case "lead":{
+            case "leads":{
                 var listOfLeads = leadRepository.findAll();
                 if (listOfLeads.isEmpty()){
                     utilPrints.printWithColor("Leads table is empty...",ConsoleColors.RED_BOLD);
@@ -54,10 +54,9 @@ public class MenuList {
                                 "========================================"+
                         ConsoleColors.RESET);
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
             }
-            case "opportunity":{
+            case "opportunities":{
                 var listOfAllOpportunities = opportunityRepository.findAll();
                 if (listOfAllOpportunities.isEmpty()){
                     utilPrints.printWithColor("Opportunities table is empty...",ConsoleColors.RED_BOLD);
@@ -80,10 +79,9 @@ public class MenuList {
                         "======================================================"+
                         ConsoleColors.RESET);
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
             }
-            case "account":{
+            case "accounts":{
                 var listOfAllAccounts = accountRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
                     utilPrints.printWithColor("Account table is empty...",ConsoleColors.RED_BOLD);
@@ -106,10 +104,9 @@ public class MenuList {
                 System.out.println("==================================================" +
                         "=================================================");
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
             }
-            case "contact":{
+            case "contacts":{
                 var listOfAllAccounts = contactRepository.findAll();
                 if (listOfAllAccounts.isEmpty()){
                     utilPrints.printWithColor("Contacts table is empty...",ConsoleColors.RED_BOLD);
@@ -138,14 +135,10 @@ public class MenuList {
                 System.out.println("====================================================" +
                         "===============================================================");
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
             }
             default:{
-                String message = "Please put the command complete, for more information type 'help'.";
-                utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
-                utils.promptEnterKey();
-                utils.clearScreen();
+                utilPrints.printInvalidCommand();
             }
         }
     }
