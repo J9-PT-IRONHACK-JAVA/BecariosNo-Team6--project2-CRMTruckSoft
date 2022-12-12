@@ -18,7 +18,7 @@ public class MenuLookup {
     private final ContactRepository contactRepository;
     private final Utils utils;
     private final UtilPrints utilPrints;
-    public void lookupMenu(String[] options) throws Exception {
+    public void lookupMenu(String[] options) {
         switch (options[1]) {
             case "lead": {
                 if (utils.isNumeric(options[2])) {

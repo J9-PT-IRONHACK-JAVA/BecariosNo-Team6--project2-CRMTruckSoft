@@ -28,25 +28,18 @@ public class MenuLink {
                     var opportunity = opportunityRepository.findById(Long.valueOf(option[2]));
                     var account = accountRepository.findById(Long.valueOf(option[4]));
 
-                    if (!option[3].toLowerCase().equals("to")){
-                        String message = "Please put the command complete, for more information type 'help'.";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                    if (!option[3].equalsIgnoreCase("to")){
+                        utilPrints.printCommandIncomplete();
                         break;
                     }else if (opportunity.isEmpty()){
-                        String message = "Please put a correct Nº of Opportunity." +
-                                " For see all Opportunities type 'list opportunity'";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                        utilPrints.printWithColor("Please type a correct Id# of Opportunity. " +
+                                "To see all available Opportunities type 'list opportunities'", ConsoleColors.RED);
                         utils.promptEnterKey();
-                        utils.clearScreen();
                         break;
                     }else if (account.isEmpty()){
-                        String message = "Please put a correct Nº of Account." +
-                                " For see all Accounts type 'list account'";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                        utilPrints.printWithColor("Please type a correct Id# of Account. " +
+                                "To see all available Accounts type 'list accounts'", ConsoleColors.RED);
                         utils.promptEnterKey();
-                        utils.clearScreen();
                         break;
                     }else {
                         // Set the account to opportunity
@@ -56,19 +49,18 @@ public class MenuLink {
                         String message = "Opportunity Nº " + opportunity.get().getId() +
                                 " assigned to Company "+account.get().getCompanyName()+
                                 " (Account Nº " + account.get().getId() + ")";
-                        utilPrints.printWithColor(message, ConsoleColors.GREEN_BOLD);
+                        utilPrints.printWithColor(message, ConsoleColors.GREEN);
 
                     }
 
                 }catch (Exception e){
                     String message = "Error, format must be 'link opportunity A to B' " +
-                            "where A is a number of Contact and B is a number of Opportunity.\n" +
+                            "where A is a number of Contact and B is a number of Account.\n" +
                             "Type 'help' for more information.";
-                    utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                    utilPrints.printWithColor(message, ConsoleColors.RED);
 
                 }
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
 
             }
@@ -76,50 +68,39 @@ public class MenuLink {
                 try {
                     var contact = contactRepository.findById(Long.valueOf(option[2]));
                     var account = accountRepository.findById(Long.valueOf(option[4]));
-                    if (!option[3].toLowerCase().equals("to")){
-                        String message = "Please put the command complete, for more information type 'help'.";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
-                        utils.promptEnterKey();
-                        utils.clearScreen();
+                    if (!option[3].equalsIgnoreCase("to")){
+                        utilPrints.printCommandIncomplete();
                         break;
                     }else if (account.isEmpty()){
-                        String message ="Please put a correct Nº of Account." +
-                                " For see all Opportunities type 'list account'";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                        utilPrints.printWithColor("Please type a correct Id# of Account. " +
+                                "To see all available Accounts type 'list accounts'", ConsoleColors.RED);
                         utils.promptEnterKey();
-                        utils.clearScreen();
                         break;
                     }else if (contact.isEmpty()){
-                        String message ="Please put a correct Nº of Contact." +
-                                " For see all Contacts type 'list contact'";
-                        utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                        utilPrints.printWithColor("Please type a correct Id# of Contact. " +
+                                "To see all available Contacts type 'list contacts'", ConsoleColors.RED);
                         utils.promptEnterKey();
-                        utils.clearScreen();
                         break;
                     }else {
                         // Set the account to contact
                         contact.get().setAccount(account.get());
                         contactRepository.save(contact.get());
                         String message ="Contact " + contact.get().getName() +
-                                " assigned to Account Nº " + account.get().getId();
-                        utilPrints.printWithColor(message, ConsoleColors.GREEN_BOLD);
+                                " assigned to Account number " + account.get().getId();
+                        utilPrints.printWithColor(message, ConsoleColors.GREEN);
                     }
 
                 }catch (Exception e){
                     String message ="Error, format must be 'link contact A to B' " +
                             "where A is a number of Contact and B is a number of Account.\n" +
                             "Type 'help' for more information.";
-                    utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
+                    utilPrints.printWithColor(message, ConsoleColors.RED);
                 }
                 utils.promptEnterKey();
-                utils.clearScreen();
                 break;
             }
             default:{
-                String message = "Please put the command complete, for more information type 'help'.";
-                utilPrints.printWithColor(message, ConsoleColors.RED_BOLD);
-                utils.promptEnterKey();
-                utils.clearScreen();
+                utilPrints.printInvalidCommand();
             }
         }
     }
