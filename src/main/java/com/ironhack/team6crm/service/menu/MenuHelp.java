@@ -27,8 +27,8 @@ public class MenuHelp {
 
         System.out.println("CRM Truck Soft. - Version 1.0\n");
         utils.promptEnterKey();
-        System.out.println("**************************************");
-        System.out.println("\nAVAILABLE COMMANDS:");
+        utilPrints.printWithColor("**************************************", ConsoleColors.WHITE_BOLD_BRIGHT);
+        utilPrints.printWithColor("\nAVAILABLE COMMANDS:", ConsoleColors.WHITE_BOLD_BRIGHT);
 
         System.out.println("\n- 'help'");
         System.out.println("    - 'help' : Show info and help.");
@@ -43,10 +43,10 @@ public class MenuHelp {
         System.out.println("    - 'lookup account X' : Lookup for Account, where X is the Id# of Account.");
         System.out.println("    - 'lookup contact X' : Lookup for Contact, where X is the Id# of Contact.");
         System.out.println("\n- 'list'");
-        System.out.println("    - 'list lead' : List of all Leads.");
-        System.out.println("    - 'list opportunity' : List of all Opportunities.");
-        System.out.println("    - 'list account' : List of all Accounts.");
-        System.out.println("    - 'list contact' : List of all Contacts.");
+        System.out.println("    - 'list leads' : List of all Leads.");
+        System.out.println("    - 'list opportunities' : List of all Opportunities.");
+        System.out.println("    - 'list accounts' : List of all Accounts.");
+        System.out.println("    - 'list contacts' : List of all Contacts.");
 
         utils.promptEnterKey();
         System.out.println("\n- 'update'");
@@ -75,9 +75,8 @@ public class MenuHelp {
 
 
         System.out.println(ConsoleColors.BLUE + "\nFor support contact: admin@crmtrucksoft.com");
-        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "**************************************" + ConsoleColors.RESET);
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + "**************************************\n" + ConsoleColors.RESET);
         utils.promptEnterKey();
-        utils.clearScreen();
     }
 
 }

@@ -1,8 +1,7 @@
 package com.ironhack.team6crm.utils;
 
-import com.ironhack.team6crm.model.Industry;
-import com.ironhack.team6crm.model.Product;
-import com.ironhack.team6crm.model.Status;
+import com.ironhack.team6crm.model.*;
+import com.ironhack.team6crm.service.SalesRepService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,7 @@ public class InputData {
     private final UtilPrints utilPrints;
     private final Utils utils;
     private final Scanner scanner = new Scanner(System.in);
+    private final SalesRepService salesRepService;
 
     public List<String> getInputData(String... questions) {
         List<String> inputData = new ArrayList<>();
@@ -66,8 +66,8 @@ public class InputData {
     public String inputEmail(String request){
         String input = "";
         do {
-            System.out.println("\n" + request);
-            input = scanner.nextLine();
+            System.out.println(request);
+            input = scanner.next();
             if (utils.validateEmail(input));
             else utilPrints.printWithColor("Please type a valid email", ConsoleColors.RED);
         } while (!utils.validateEmail(input));
@@ -101,6 +101,25 @@ public class InputData {
         var statusSelected = inputIntegerWithRange("Please pick your selection by number:", 0, Status.values().length);
         return Status.values()[statusSelected];
 
+    }
+
+    public SalesRep retrieveSalesRepByName(String name) {
+        SalesRep correctSalesRep = null;
+        var input = "";
+        do {
+            try {
+                correctSalesRep = salesRepService.findByNameIgnoreCase(name).orElseThrow(Exception::new);
+            } catch (Exception e) {
+                utilPrints.printWithColor(name + "in not a valid SalesRep name", ConsoleColors.RED);
+                var srList = salesRepService.findAll();
+                System.out.println("\nChoose a SalesRep:\n");
+                for (SalesRep sr : srList){
+                    System.out.printf("%s - %s\n", sr.getId() , sr.getName());
+                }
+                correctSalesRep = srList.get(inputIntegerWithRange("Please pick your selection by number:", 0, srList.size()));
+            }
+        } while(correctSalesRep==null);
+        return correctSalesRep;
     }
 
 }

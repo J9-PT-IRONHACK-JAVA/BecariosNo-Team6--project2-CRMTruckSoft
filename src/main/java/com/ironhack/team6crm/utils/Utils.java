@@ -29,7 +29,7 @@ public class Utils {
 
     public void promptEnterKey() {
         System.out.println(ConsoleColors.BLUE+
-                "Press ENTER to continue..."+
+                "\nPress ENTER to continue..."+
                 ConsoleColors.RESET);
         try{
             System.in.read();
